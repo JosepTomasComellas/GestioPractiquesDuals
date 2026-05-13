@@ -1,6 +1,6 @@
 # INSTALL
 
-Versio actual del producte: `V:0.1.0`
+Versio actual del producte: `V:0.1.2`
 
 Aquest document descriu la instal.lacio i posada en marxa inicial de **Gestio de les practiques Duals**.
 
@@ -56,6 +56,40 @@ Des de `D:\Codex\Duals\deploy\docker`:
 docker compose up --build
 ```
 
+## Desplegament en LXC de Proxmox
+
+Per a entorns LXC es treballara sobre la ruta acordada:
+
+- `/docker/GestioPractiquesDuals`
+
+Script de desplegament/actualitzacio:
+
+- [deploy-lxc.sh](/D:/Codex/Duals/deploy/docker/deploy-lxc.sh)
+
+Exemple d'us:
+
+```bash
+chmod +x /docker/GestioPractiquesDuals/deploy/docker/deploy-lxc.sh
+/docker/GestioPractiquesDuals/deploy/docker/deploy-lxc.sh
+```
+
+Exemple clonant en una ruta concreta:
+
+```bash
+APP_DIR=/docker/GestioPractiquesDuals \
+REPO_URL=https://github.com/JosepTomasComellas/GestioPractiquesDuals.git \
+bash /docker/GestioPractiquesDuals/deploy/docker/deploy-lxc.sh
+```
+
+El script:
+
+- valida `git` i `docker`;
+- clona el repositori si encara no existeix;
+- fa `fetch` i `pull` de `main`;
+- comprova que existeixi `docker-compose.yml`;
+- executa `docker compose up -d --build`;
+- mostra l'estat final dels serveis.
+
 ## Serveis previstos
 
 - `postgres`: base de dades principal
@@ -89,6 +123,11 @@ Quan es faci una nova fase o una modificacio rellevant, cal actualitzar:
 - `README.md`
 - `INSTALL.md`
 - `Directory.Build.props`
+
+Canvi actual:
+
+- `V:0.1.1`: s'afegeix script de desplegament/actualitzacio per entorn LXC.
+- `V:0.1.2`: s'ajusta la ruta objectiu de desplegament a `/docker/GestioPractiquesDuals`.
 
 ## Publicacio a GitHub
 

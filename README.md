@@ -1,6 +1,6 @@
 # Gestio de les practiques Duals
 
-Versio actual del producte: `V:0.1.0`
+Versio actual del producte: `V:0.1.2`
 
 Projecte per a la gestio de les practiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
 
@@ -34,6 +34,23 @@ Projecte per a la gestio de les practiques Duals dels cicles formatius, implemen
 ## Execucio local
 
 Per la posada en marxa local consulta [INSTALL.md](/D:/Codex/Duals/INSTALL.md).
+
+## Desplegament en LXC
+
+Per al desplegament o actualitzacio en un contenidor LXC de Proxmox es disposa del script:
+
+- [deploy-lxc.sh](/D:/Codex/Duals/deploy/docker/deploy-lxc.sh)
+
+El script permet:
+
+- clonar o reutilitzar el repositori;
+- actualitzar el codi des de `main`;
+- reconstruir i aixecar els contenidors;
+- mostrar l'estat final dels serveis.
+
+Ruta objectiu de desplegament acordada:
+
+- `/docker/GestioPractiquesDuals`
 
 ## Versionat del producte
 
