@@ -1,0 +1,46 @@
+@page "/"
+
+<PageTitle>Gestio de les practiques Duals</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="pa-6">
+    <MudGrid Spacing="4">
+        <MudItem xs="12">
+            <MudPaper Class="hero pa-8">
+                <MudText Typo="Typo.h3" Class="mb-2">Gestio de les practiques Duals</MudText>
+                <MudText Typo="Typo.subtitle1" Class="mb-4">
+                    Base inicial de la fase 1 amb arquitectura simple, PostgreSQL, Docker i suport preparat per MCP.
+                </MudText>
+                <MudStack Row="true" Spacing="2">
+                    <MudChip T="string" Color="Color.Primary" Variant="Variant.Filled">Blazor</MudChip>
+                    <MudChip T="string" Color="Color.Secondary" Variant="Variant.Filled">API .NET 10</MudChip>
+                    <MudChip T="string" Color="Color.Success" Variant="Variant.Filled">PostgreSQL</MudChip>
+                    <MudChip T="string" Color="Color.Error" Variant="Variant.Filled">MudBlazor</MudChip>
+                </MudStack>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="4">
+            <MudPaper Class="kpi-card pa-4">
+                <MudText Typo="Typo.overline">Projecte</MudText>
+                <MudText Typo="Typo.h5">Fase 1 iniciada</MudText>
+                <MudText Typo="Typo.body2">Esquelet de solucio, domini inicial i desplegament base.</MudText>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="4">
+            <MudPaper Class="kpi-card pa-4">
+                <MudText Typo="Typo.overline">Persistencia</MudText>
+                <MudText Typo="Typo.h5">PostgreSQL portable</MudText>
+                <MudText Typo="Typo.body2">Preparada per externalitzar la base de dades sense reestructurar el codi.</MudText>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="4">
+            <MudPaper Class="kpi-card pa-4">
+                <MudText Typo="Typo.overline">Extensibilitat</MudText>
+                <MudText Typo="Typo.h5">MCP preparat</MudText>
+                <MudText Typo="Typo.body2">Capa reservada per consultes segures i evolucions futures.</MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

@@ -1,0 +1,19 @@
+@inherits LayoutComponentBase
+
+<MudLayout>
+    <MudAppBar Elevation="1" Dense="true" Class="app-shell">
+        <MudText Typo="Typo.h6">Gestio de les practiques Duals</MudText>
+        <MudSpacer />
+        <MudChip T="string" Color="Color.Error" Variant="Variant.Filled">Fase 1</MudChip>
+    </MudAppBar>
+
+    <MudMainContent Class="main-content">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">x</span>
+</div>

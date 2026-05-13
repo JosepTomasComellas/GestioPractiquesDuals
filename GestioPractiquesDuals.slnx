@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GestioPractiquesDuals.Api/GestioPractiquesDuals.Api.csproj" />
+    <Project Path="src/GestioPractiquesDuals.Application/GestioPractiquesDuals.Application.csproj" />
+    <Project Path="src/GestioPractiquesDuals.Domain/GestioPractiquesDuals.Domain.csproj" />
+    <Project Path="src/GestioPractiquesDuals.Infrastructure/GestioPractiquesDuals.Infrastructure.csproj" />
+    <Project Path="src/GestioPractiquesDuals.McpServer/GestioPractiquesDuals.McpServer.csproj" />
+    <Project Path="src/GestioPractiquesDuals.Shared/GestioPractiquesDuals.Shared.csproj" />
+    <Project Path="src/GestioPractiquesDuals.Web/GestioPractiquesDuals.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GestioPractiquesDuals.Application.Tests/GestioPractiquesDuals.Application.Tests.csproj" />
+    <Project Path="tests/GestioPractiquesDuals.Domain.Tests/GestioPractiquesDuals.Domain.Tests.csproj" />
+    <Project Path="tests/GestioPractiquesDuals.IntegrationTests/GestioPractiquesDuals.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
