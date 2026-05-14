@@ -48,7 +48,7 @@ services:
     container_name: duals-web
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ApiBaseUrl: http://api/
+      ApiBaseUrl: http://api:8080/
       Postgres__ConnectionString: Host=postgres;Port=5432;Database=duals;Username=duals;Password=duals
       ConnectionStrings__Redis: redis:6379
       DataProtection__KeysPath: /keys

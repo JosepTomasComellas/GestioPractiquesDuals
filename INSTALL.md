@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.3.7`
+Versió actual del producte: `V:0.3.9`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -90,6 +90,11 @@ El script:
 - comprova que existeixi `docker-compose.yml`;
 - executa `docker compose up -d --build`;
 - mostra l'estat final dels serveis.
+
+En la configuracio actual del `docker compose`:
+
+- la web resol l'API pel nom de servei Docker `api`
+- el port intern correcte de l'API es `8080`
 
 ## Fitxer `.env`
 
