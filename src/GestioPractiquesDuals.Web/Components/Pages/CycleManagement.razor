@@ -1,0 +1,114 @@
+@page "/cycles/manage"
+@using GestioPractiquesDuals.Application.AcademicStructure
+@attribute [Authorize]
+@inject GestioPractiquesDuals.Web.Services.AcademicStructureApiClient AcademicStructureApiClient
+
+<PageTitle>Cicles i tutors · Gestió de les pràctiques Duals</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="cycle-management-shell">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="cycle-management-header">
+        <div>
+            <MudText Typo="Typo.h4" Class="cycle-management-title">Cicles i tutors</MudText>
+            <MudText Typo="Typo.body1" Class="cycle-management-subtitle">
+                Vista de cicles, grups i professorat del curs @_overview.ActiveAcademicYear
+            </MudText>
+        </div>
+
+        <MudStack Row="true" Spacing="2">
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Groups" Href="/classes/manage">VEURE CLASSES</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.PersonAdd">NOU TUTOR</MudButton>
+        </MudStack>
+    </MudStack>
+
+    <MudGrid Spacing="3">
+        @foreach (var cycle in _overview.Cycles)
+        {
+            <MudItem xs="12" xl="6">
+                <MudPaper Class="cycle-card">
+                    <div class="cycle-card-top">
+                        <div>
+                            <MudText Typo="Typo.h6" Class="cycle-code">@cycle.Code</MudText>
+                            <MudText Typo="Typo.body1" Class="cycle-name">@cycle.Name</MudText>
+                        </div>
+                        <MudChip T="string" Variant="Variant.Filled" Color="Color.Default" Class="cycle-chip">
+                            @($"{cycle.ClassCount} classes")
+                        </MudChip>
+                    </div>
+
+                    <MudGrid Spacing="2" Class="cycle-stat-grid">
+                        <MudItem xs="4">
+                            <div class="cycle-stat">
+                                <span class="cycle-stat-value">@cycle.StudentCount</span>
+                                <span class="cycle-stat-label">Alumnes</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="4">
+                            <div class="cycle-stat">
+                                <span class="cycle-stat-value">@cycle.OpenAgreementCount</span>
+                                <span class="cycle-stat-label">Convenis oberts</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="4">
+                            <div class="cycle-stat">
+                                <span class="cycle-stat-value">@cycle.Teachers.Count</span>
+                                <span class="cycle-stat-label">Tutors</span>
+                            </div>
+                        </MudItem>
+                    </MudGrid>
+
+                    <div class="cycle-section">
+                        <MudText Typo="Typo.subtitle2" Class="cycle-section-title">Classes del cicle</MudText>
+                        <div class="class-chip-row">
+                            @foreach (var classCode in cycle.ClassCodes)
+                            {
+                                <MudChip T="string" Variant="Variant.Outlined" Class="class-code-chip">@classCode</MudChip>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="cycle-section">
+                        <MudText Typo="Typo.subtitle2" Class="cycle-section-title">Professorat i gestió</MudText>
+                        <div class="teacher-list">
+                            @foreach (var teacher in cycle.Teachers)
+                            {
+                                <div class="teacher-row">
+                                    <div class="teacher-main">
+                                        <MudAvatar Size="Size.Medium" Class="teacher-avatar">@GetInitials(teacher.FullName)</MudAvatar>
+                                        <div class="teacher-copy">
+                                            <div class="teacher-name">@teacher.FullName</div>
+                                            <div class="teacher-email">@teacher.Email</div>
+                                        </div>
+                                    </div>
+                                    @if (teacher.IsManager)
+                                    {
+                                        <MudChip T="string" Variant="Variant.Filled" Color="Color.Error" Class="manager-chip">Gestor</MudChip>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private CycleManagementOverviewDto _overview = new("Carregant...", Array.Empty<CycleOverviewDto>());
+
+    protected override async Task OnInitializedAsync()
+    {
+        _overview = await AcademicStructureApiClient.GetCycleManagementOverviewAsync();
+    }
+
+    private static string GetInitials(string fullName)
+    {
+        var parts = fullName.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        return parts.Length switch
+        {
+            0 => "T",
+            1 => parts[0][0].ToString().ToUpperInvariant(),
+            _ => string.Concat(parts[0][0], parts[^1][0]).ToUpperInvariant()
+        };
+    }
+}

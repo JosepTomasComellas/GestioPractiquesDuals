@@ -8,9 +8,9 @@
 <MudContainer MaxWidth="MaxWidth.False" Class="dashboard-shell">
     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="dashboard-header">
         <MudText Typo="Typo.h3" Class="welcome-title">@_dashboard.WelcomeMessage</MudText>
-        <MudStack Row="true" Spacing="2">
-            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Bookmarks">GESTIÓ DE CLASSES</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Add">NOVA ACTIVITAT</MudButton>
+        <MudStack Row="true" Spacing="2" Class="dashboard-actions">
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Bookmarks" Class="toolbar-button toolbar-button-secondary" Href="/classes/manage">GESTIÓ DE CLASSES</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Add" Class="toolbar-button toolbar-button-primary">NOVA ACTIVITAT</MudButton>
         </MudStack>
     </MudStack>
 
@@ -19,9 +19,9 @@
         {
             <MudItem xs="12" sm="6" md="4" lg="2">
                 <MudPaper Class="stat-card pa-4">
-                    <MudIcon Icon="@GetMaterialIcon(card.Icon)" Size="Size.Medium" Style="@($"color:{card.Color};")" />
-                    <MudText Typo="Typo.h4" Style="@($"color:{card.Color};")">@card.Value</MudText>
-                    <MudText Typo="Typo.body2">@card.Label</MudText>
+                    <MudIcon Icon="@GetMaterialIcon(card.Icon)" Size="Size.Medium" Class="stat-icon" Style="@($"color:{card.Color};")" />
+                    <MudText Typo="Typo.h4" Class="stat-value" Style="@($"color:{card.Color};")">@card.Value</MudText>
+                    <MudText Typo="Typo.body2" Class="stat-label">@card.Label</MudText>
                 </MudPaper>
             </MudItem>
         }
@@ -29,27 +29,37 @@
 
     <MudGrid Spacing="2" Class="filters-grid">
         <MudItem xs="12" md="3">
-            <MudTextField T="string" Variant="Variant.Outlined" Placeholder="Cercar activitat" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" FullWidth="true" />
+            <div class="filter-box">
+                <div class="filter-label">Cercar activitat</div>
+                <MudTextField T="string" Variant="Variant.Outlined" Placeholder="Cercar activitat" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" FullWidth="true" Margin="Margin.Dense" />
+            </div>
         </MudItem>
         <MudItem xs="12" md="3">
-            <MudSelect T="string" @bind-Value="_selectedClass" Variant="Variant.Outlined" FullWidth="true">
-                @foreach (var className in _dashboard.AvailableClasses)
-                {
-                    <MudSelectItem T="string" Value="@className">@className</MudSelectItem>
-                }
-            </MudSelect>
+            <div class="filter-box">
+                <div class="filter-label">Classe</div>
+                <MudSelect T="string" @bind-Value="_selectedClass" Variant="Variant.Outlined" FullWidth="true" Margin="Margin.Dense">
+                    @foreach (var className in _dashboard.AvailableClasses)
+                    {
+                        <MudSelectItem T="string" Value="@className">@className</MudSelectItem>
+                    }
+                </MudSelect>
+            </div>
         </MudItem>
         <MudItem xs="12" md="3">
-            <MudSelect T="string" @bind-Value="_selectedModule" Variant="Variant.Outlined" FullWidth="true">
-                @foreach (var moduleName in _dashboard.AvailableModules)
-                {
-                    <MudSelectItem T="string" Value="@moduleName">@moduleName</MudSelectItem>
-                }
-            </MudSelect>
+            <div class="filter-box">
+                <div class="filter-label">Mòdul</div>
+                <MudSelect T="string" @bind-Value="_selectedModule" Variant="Variant.Outlined" FullWidth="true" Margin="Margin.Dense">
+                    @foreach (var moduleName in _dashboard.AvailableModules)
+                    {
+                        <MudSelectItem T="string" Value="@moduleName">@moduleName</MudSelectItem>
+                    }
+                </MudSelect>
+            </div>
         </MudItem>
         <MudItem xs="12" md="3" Class="toggle-zone">
-            <MudSwitch T="bool" Label="Només obertes" Color="Color.Success" />
+            <MudSwitch T="bool" Label="Només obertes" Color="Color.Default" />
             <MudSwitch T="bool" Label="Arxivades" Color="Color.Default" />
+            <MudText Typo="Typo.body2" Class="toggle-count">@($"{_dashboard.ClosedActivities.Count} de {_dashboard.ClosedActivities.Count}")</MudText>
         </MudItem>
     </MudGrid>
 
@@ -63,18 +73,18 @@
         {
             <MudItem xs="12" md="8" lg="6">
                 <MudPaper Class="activity-card pa-4">
-                    <MudText Typo="Typo.h5" Class="mb-1">@open.Code</MudText>
-                    <MudText Typo="Typo.body2" Class="muted mb-4">@open.Subtitle</MudText>
-                    <MudText Typo="Typo.body1" Class="mb-4">@open.Description</MudText>
+                    <MudText Typo="Typo.h5" Class="activity-code mb-1">@open.Code</MudText>
+                    <MudText Typo="Typo.body2" Class="muted activity-subtitle mb-4">@open.Subtitle</MudText>
+                    <MudText Typo="Typo.body1" Class="activity-description mb-4">@open.Description</MudText>
 
                     <MudStack Row="true" Spacing="1" Class="mb-3">
                         @foreach (var chip in open.Chips)
                         {
-                            <MudChip T="string" Variant="Variant.Outlined">@chip</MudChip>
+                            <MudChip T="string" Variant="Variant.Outlined" Class="info-chip">@chip</MudChip>
                         }
                         @if (!string.IsNullOrWhiteSpace(open.Highlight))
                         {
-                            <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled">@open.Highlight</MudChip>
+                            <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled" Class="highlight-chip">@open.Highlight</MudChip>
                         }
                     </MudStack>
 
@@ -83,14 +93,14 @@
                     </div>
 
                     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mt-4">
-                        <MudStack Row="true" Spacing="2">
-                            <MudButton Variant="Variant.Text" Color="Color.Error">RESULTATS</MudButton>
-                            <MudButton Variant="Variant.Text" Color="Color.Default">GRUPS</MudButton>
-                            <MudIconButton Icon="@Icons.Material.Filled.Edit" />
-                            <MudIconButton Icon="@Icons.Material.Filled.BarChart" Color="Color.Error" />
-                            <MudIconButton Icon="@Icons.Material.Filled.Campaign" Color="Color.Info" />
+                        <MudStack Row="true" Spacing="2" Class="activity-actions">
+                            <MudButton Variant="Variant.Text" Color="Color.Error" Class="activity-link activity-link-primary">RESULTATS</MudButton>
+                            <MudButton Variant="Variant.Text" Color="Color.Default" Class="activity-link">GRUPS</MudButton>
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Class="activity-icon" />
+                            <MudIconButton Icon="@Icons.Material.Filled.BarChart" Color="Color.Error" Class="activity-icon" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Campaign" Color="Color.Info" Class="activity-icon" />
                         </MudStack>
-                        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" />
+                        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Class="more-button" />
                     </MudStack>
                 </MudPaper>
             </MudItem>
@@ -107,12 +117,12 @@
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Class="closed-card pa-4">
-                    <MudText Typo="Typo.h6">@closed.Code</MudText>
-                    <MudText Typo="Typo.body2">@closed.Title</MudText>
+                    <MudText Typo="Typo.h6" Class="closed-code">@closed.Code</MudText>
+                    <MudText Typo="Typo.body2" Class="closed-title-text">@closed.Title</MudText>
                     <MudText Typo="Typo.caption" Class="muted">@closed.Subtitle</MudText>
                     <MudStack Row="true" Justify="Justify.SpaceBetween" Class="mt-6">
                         <MudIcon Icon="@Icons.Material.Filled.Badge" Style="color:#d84c3e;" />
-                        <MudIcon Icon="@Icons.Material.Filled.MoreVert" />
+                        <MudIcon Icon="@Icons.Material.Filled.MoreVert" Class="closed-more" />
                     </MudStack>
                 </MudPaper>
             </MudItem>

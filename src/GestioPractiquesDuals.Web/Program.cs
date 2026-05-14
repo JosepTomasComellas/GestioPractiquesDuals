@@ -49,7 +49,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
         ForwardedHeaders.XForwardedFor |
         ForwardedHeaders.XForwardedProto |
         ForwardedHeaders.XForwardedHost;
-    options.KnownNetworks.Clear();
+    options.KnownIPNetworks.Clear();
     options.KnownProxies.Clear();
 });
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
@@ -67,6 +67,11 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
     .AddDefaultTokenProviders();
 builder.Services.AddScoped<IdentitySeeder>();
 builder.Services.AddHttpClient<DashboardApiClient>(client =>
+{
+    var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5158/";
+    client.BaseAddress = new Uri(apiBaseUrl, UriKind.Absolute);
+});
+builder.Services.AddHttpClient<AcademicStructureApiClient>(client =>
 {
     var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5158/";
     client.BaseAddress = new Uri(apiBaseUrl, UriKind.Absolute);

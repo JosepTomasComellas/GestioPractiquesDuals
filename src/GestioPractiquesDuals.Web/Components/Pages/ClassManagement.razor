@@ -1,0 +1,109 @@
+@page "/classes/manage"
+@using GestioPractiquesDuals.Application.AcademicStructure
+@attribute [Authorize]
+@inject GestioPractiquesDuals.Web.Services.AcademicStructureApiClient AcademicStructureApiClient
+
+<PageTitle>Gestió de classes · Gestió de les pràctiques Duals</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="class-management-shell">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="class-management-header">
+        <div>
+            <MudText Typo="Typo.h4" Class="class-management-title">Gestió de classes</MudText>
+            <MudText Typo="Typo.body1" Class="class-management-subtitle">
+                Estructura acadèmica activa: @_overview.ActiveAcademicYear
+            </MudText>
+        </div>
+
+        <MudStack Row="true" Spacing="2">
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Hub" Href="/cycles/manage">VEURE CICLES</MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.SwapHoriz">PROMOCIÓ DE CURS</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Add">NOVA CLASSE</MudButton>
+        </MudStack>
+    </MudStack>
+
+    <MudGrid Spacing="3" Class="class-year-grid">
+        @foreach (var year in _overview.AcademicYears)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Class="@($"academic-year-card {(year.IsActive ? "is-active" : string.Empty)}")">
+                    <div class="academic-year-chip">@(year.IsActive ? "Actiu" : "Històric")</div>
+                    <MudText Typo="Typo.h6" Class="academic-year-code">@year.Code</MudText>
+                    <MudText Typo="Typo.body2" Class="academic-year-name">@year.Name</MudText>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudPaper Class="class-table-card">
+        <div class="class-table-header">
+            <MudText Typo="Typo.h6">Classes del curs</MudText>
+            <MudText Typo="Typo.body2">@($"{_overview.ClassGroups.Count} registres")</MudText>
+        </div>
+
+        <MudTable Items="_overview.ClassGroups" Dense="true" Hover="true" Breakpoint="Breakpoint.Sm" Class="class-table">
+            <HeaderContent>
+                <MudTh>Codi</MudTh>
+                <MudTh>Classe</MudTh>
+                <MudTh>Cicle</MudTh>
+                <MudTh>Tutor</MudTh>
+                <MudTh>Alumnes</MudTh>
+                <MudTh>Convenis oberts</MudTh>
+                <MudTh>Formulari alumne</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Codi">@context.Code</MudTd>
+                <MudTd DataLabel="Classe">@context.Name</MudTd>
+                <MudTd DataLabel="Cicle">
+                    <div class="cycle-cell">
+                        <strong>@context.CycleCode</strong>
+                        <span>@context.CycleName</span>
+                    </div>
+                </MudTd>
+                <MudTd DataLabel="Tutor">@context.TutorName</MudTd>
+                <MudTd DataLabel="Alumnes">@context.StudentCount</MudTd>
+                <MudTd DataLabel="Convenis oberts">@context.OpenAgreementCount</MudTd>
+                <MudTd DataLabel="Formulari alumne">
+                    <div class="table-switch">
+                        <MudSwitch T="bool"
+                                   Value="@context.CanStudentsEditProfile"
+                                   ValueChanged="@(async value => await ToggleClassProfileEditingAsync(context.Id, value))"
+                                   Color="Color.Success" />
+                        <MudChip T="string"
+                                 Variant="Variant.Filled"
+                                 Color="@(context.CanStudentsEditProfile ? Color.Success : Color.Default)"
+                                 Class="table-chip">
+                            @(context.CanStudentsEditProfile ? "Obert" : "Tancat")
+                        </MudChip>
+                    </div>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private AcademicOverviewDto _overview =
+        new("Carregant...", Array.Empty<AcademicYearDto>(), Array.Empty<ClassGroupOverviewDto>());
+
+    protected override async Task OnInitializedAsync()
+    {
+        _overview = await AcademicStructureApiClient.GetOverviewAsync();
+    }
+
+    private async Task ToggleClassProfileEditingAsync(Guid classGroupId, bool canEditProfile)
+    {
+        var updated = await AcademicStructureApiClient.SetClassProfileEditingAsync(classGroupId, canEditProfile);
+        if (!updated)
+        {
+            return;
+        }
+
+        var classGroups = _overview.ClassGroups
+            .Select(classGroup => classGroup.Id == classGroupId
+                ? classGroup with { CanStudentsEditProfile = canEditProfile }
+                : classGroup)
+            .ToArray();
+
+        _overview = _overview with { ClassGroups = classGroups };
+    }
+}

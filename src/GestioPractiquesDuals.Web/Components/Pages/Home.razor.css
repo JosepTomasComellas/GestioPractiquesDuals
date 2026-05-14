@@ -1,14 +1,36 @@
 .dashboard-shell {
-    padding: 1.6rem 1.8rem 2rem;
+    padding: 1.55rem 1.55rem 2rem;
+    max-width: 1940px;
 }
 
 .dashboard-header {
-    margin-bottom: 1.15rem;
+    margin-bottom: 1.2rem;
 }
 
 .welcome-title {
     color: #43484f;
     font-weight: 400;
+    line-height: 1.15;
+}
+
+.dashboard-actions {
+    flex-wrap: wrap;
+}
+
+.toolbar-button {
+    min-height: 38px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 22px rgba(31, 43, 67, 0.06);
+}
+
+.toolbar-button-primary {
+    min-width: 176px;
+}
+
+.toolbar-button-secondary {
+    min-width: 188px;
 }
 
 .kpi-grid,
@@ -17,11 +39,55 @@
 }
 
 .stat-card {
-    min-height: 138px;
-    border-radius: 14px;
-    background: rgba(255,255,255,0.92);
-    border: 1px solid rgba(31, 43, 67, 0.06);
-    box-shadow: 0 8px 22px rgba(31, 43, 67, 0.06);
+    min-height: 124px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.93);
+    border: 1px solid rgba(31, 43, 67, 0.08);
+    box-shadow: 0 8px 18px rgba(31, 43, 67, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-icon {
+    margin-bottom: 0.35rem;
+}
+
+.stat-value {
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.stat-label {
+    color: #4e5560;
+    font-size: 0.96rem;
+    font-weight: 500;
+}
+
+.filter-box {
+    display: grid;
+}
+
+.filter-label {
+    color: #5f6773;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: -0.1rem;
+    padding-left: 0.2rem;
+}
+
+.filters-grid :global(.mud-input-control) {
+    margin-top: 0;
+}
+
+.filters-grid :global(.mud-input-outlined) {
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+}
+
+.filters-grid :global(.mud-input-outlined .mud-input-outlined-border) {
+    border-color: rgba(31, 43, 67, 0.16);
 }
 
 .toggle-zone {
@@ -30,6 +96,15 @@
     justify-content: flex-end;
     gap: 1rem;
     min-height: 56px;
+}
+
+.toggle-zone :global(.mud-switch) {
+    margin-right: 0.15rem;
+}
+
+.toggle-count {
+    color: #5d6470;
+    font-weight: 500;
 }
 
 .section-title {
@@ -43,20 +118,45 @@
 
 .activity-card,
 .closed-card {
-    border-radius: 14px;
+    border-radius: 10px;
     background: rgba(255,255,255,0.95);
     border: 1px solid rgba(31, 43, 67, 0.08);
-    box-shadow: 0 10px 24px rgba(31, 43, 67, 0.06);
+    box-shadow: 0 10px 22px rgba(31, 43, 67, 0.06);
 }
 
 .activity-card {
-    min-height: 328px;
+    min-height: 290px;
 }
 
 .closed-card {
-    min-height: 148px;
-    background: rgba(255, 219, 219, 0.75);
-    border-color: rgba(214, 17, 33, 0.24);
+    min-height: 136px;
+    background: rgba(255, 209, 209, 0.72);
+    border-color: rgba(214, 17, 33, 0.28);
+}
+
+.activity-code,
+.closed-code {
+    font-weight: 700;
+    color: #39404a;
+}
+
+.activity-subtitle,
+.closed-title-text {
+    color: #58606d;
+}
+
+.activity-description {
+    color: #4e5560;
+}
+
+.info-chip {
+    border-color: rgba(31, 43, 67, 0.16);
+    color: #4e5560;
+    font-weight: 500;
+}
+
+.highlight-chip {
+    font-weight: 700;
 }
 
 .muted {
@@ -65,16 +165,37 @@
 
 .progress-rail {
     width: 100%;
-    height: 4px;
+    height: 5px;
     border-radius: 999px;
     background: #f5d8a6;
     overflow: hidden;
 }
 
 .progress-fill {
-    width: 48%;
+    width: 52%;
     height: 100%;
     background: #f59e0b;
+}
+
+.activity-actions {
+    align-items: center;
+}
+
+.activity-link {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.activity-link-primary {
+    color: #d93a2b;
+}
+
+.activity-icon {
+    color: #68707c;
+}
+
+.more-button {
+    background: rgba(31, 43, 67, 0.06);
 }
 
 .mt-6 {
@@ -83,6 +204,10 @@
 
 .closed-title {
     margin-top: 1.7rem;
+}
+
+.closed-more {
+    color: #6b7280;
 }
 
 @media (max-width: 960px) {

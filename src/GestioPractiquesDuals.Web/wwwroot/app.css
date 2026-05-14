@@ -1,9 +1,22 @@
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: #f7f4f0;
+    color: #404650;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 a, .btn-link {
-    color: #006bb7;
+    color: #d93a2b;
 }
 
 .btn-primary {
@@ -18,6 +31,15 @@ a, .btn-link {
 
 .content {
     padding-top: 1.1rem;
+}
+
+:root {
+    --duals-navy: #1f2b43;
+    --duals-red: #d93a2b;
+    --duals-soft-red: #f5d6d4;
+    --duals-ink: #404650;
+    --duals-muted: #667085;
+    --duals-paper: rgba(255,255,255,0.94);
 }
 
 h1:focus {

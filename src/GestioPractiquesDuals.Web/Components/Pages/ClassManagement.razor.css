@@ -1,0 +1,114 @@
+.class-management-shell {
+    padding: 1.55rem 1.55rem 2rem;
+    max-width: 1880px;
+}
+
+.class-management-header {
+    margin-bottom: 1.25rem;
+}
+
+.class-management-title {
+    color: #404650;
+    font-weight: 700;
+}
+
+.class-management-subtitle {
+    color: #616977;
+}
+
+.class-year-grid {
+    margin-bottom: 1.15rem;
+}
+
+.academic-year-card {
+    position: relative;
+    padding: 1.1rem 1.15rem;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.94);
+    border: 1px solid rgba(31, 43, 67, 0.08);
+    box-shadow: 0 8px 18px rgba(31, 43, 67, 0.06);
+}
+
+.academic-year-card.is-active {
+    border-color: rgba(217, 58, 43, 0.24);
+    box-shadow: 0 10px 22px rgba(217, 58, 43, 0.08);
+}
+
+.academic-year-chip {
+    position: absolute;
+    top: 0.9rem;
+    right: 0.95rem;
+    padding: 0.22rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(31, 43, 67, 0.08);
+    color: #4e5662;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.academic-year-card.is-active .academic-year-chip {
+    background: rgba(217, 58, 43, 0.12);
+    color: #ba3123;
+}
+
+.academic-year-code {
+    color: #23314d;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.academic-year-name {
+    color: #636b79;
+}
+
+.class-table-card {
+    border-radius: 12px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(31, 43, 67, 0.08);
+    box-shadow: 0 10px 24px rgba(31, 43, 67, 0.06);
+    overflow: hidden;
+}
+
+.class-table-header {
+    padding: 1rem 1.2rem 0.35rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #4b5360;
+}
+
+.class-table {
+    padding: 0 0.5rem 0.75rem;
+}
+
+.cycle-cell {
+    display: grid;
+    gap: 0.12rem;
+}
+
+.cycle-cell span {
+    color: #667085;
+    font-size: 0.88rem;
+}
+
+.table-chip {
+    font-weight: 700;
+}
+
+.table-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+@media (max-width: 960px) {
+    .class-management-header {
+        gap: 1rem;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .class-management-shell {
+        padding: 1rem 1rem 1.5rem;
+    }
+}

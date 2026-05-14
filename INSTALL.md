@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.3.9`
+Versió actual del producte: `V:0.4.0`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -95,6 +95,13 @@ En la configuracio actual del `docker compose`:
 
 - la web resol l'API pel nom de servei Docker `api`
 - el port intern correcte de l'API es `8080`
+
+El tall `V:0.4.0` incorpora:
+
+- dashboard visualment refinat
+- mòdul `Gestió de classes`
+- mòdul `Cicles i tutors`
+- commutador de control per obrir o tancar l'edició del formulari d'alumnes per classe
 
 ## Fitxer `.env`
 

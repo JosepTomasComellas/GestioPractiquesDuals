@@ -1,0 +1,154 @@
+.cycle-management-shell {
+    padding: 1.55rem 1.55rem 2rem;
+    max-width: 1880px;
+}
+
+.cycle-management-header {
+    margin-bottom: 1.25rem;
+}
+
+.cycle-management-title {
+    color: #404650;
+    font-weight: 700;
+}
+
+.cycle-management-subtitle {
+    color: #616977;
+}
+
+.cycle-card {
+    border-radius: 12px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(31, 43, 67, 0.08);
+    box-shadow: 0 10px 24px rgba(31, 43, 67, 0.06);
+    padding: 1.2rem;
+    height: 100%;
+}
+
+.cycle-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cycle-code {
+    color: #23314d;
+    font-weight: 800;
+}
+
+.cycle-name {
+    color: #5f6773;
+}
+
+.cycle-chip {
+    font-weight: 700;
+}
+
+.cycle-stat-grid {
+    margin-bottom: 1rem;
+}
+
+.cycle-stat {
+    display: grid;
+    gap: 0.1rem;
+    border-radius: 10px;
+    background: rgba(31, 43, 67, 0.04);
+    padding: 0.8rem 0.9rem;
+}
+
+.cycle-stat-value {
+    color: #23314d;
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.cycle-stat-label {
+    color: #67707d;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.cycle-section {
+    margin-top: 1rem;
+}
+
+.cycle-section-title {
+    color: #4f5763;
+    font-weight: 700;
+    margin-bottom: 0.55rem;
+}
+
+.class-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.class-code-chip {
+    font-weight: 700;
+}
+
+.teacher-list {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.teacher-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10px;
+    background: rgba(31, 43, 67, 0.04);
+    padding: 0.75rem 0.85rem;
+}
+
+.teacher-main {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.teacher-avatar {
+    background: #1f2b43;
+    color: white;
+    font-weight: 700;
+}
+
+.teacher-copy {
+    min-width: 0;
+}
+
+.teacher-name {
+    color: #3f4650;
+    font-weight: 700;
+}
+
+.teacher-email {
+    color: #69717e;
+    font-size: 0.88rem;
+}
+
+.manager-chip {
+    font-weight: 700;
+}
+
+@media (max-width: 960px) {
+    .cycle-management-header {
+        gap: 1rem;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cycle-management-shell {
+        padding: 1rem 1rem 1.5rem;
+    }
+
+    .teacher-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

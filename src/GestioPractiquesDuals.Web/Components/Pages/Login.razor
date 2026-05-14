@@ -91,7 +91,7 @@
                 </div>
             }
 
-            <div class="login-footer-meta">Salesians de Sarrià · Dept. d'Informàtica · V:0.3.6</div>
+            <div class="login-footer-meta">Salesians de Sarrià · Dept. d'Informàtica · @AppVersion</div>
         </footer>
     </section>
 </div>
@@ -104,6 +104,8 @@
     private string PrefilledEmail { get; set; } = string.Empty;
     private string PrefilledPassword { get; set; } = string.Empty;
     private string? BootstrapAdminEmail { get; set; }
+    private string AppVersion =>
+        $"V:{typeof(Program).Assembly.GetName().Version?.ToString(3) ?? "0.0.0"}";
 
     protected override async Task OnInitializedAsync()
     {
