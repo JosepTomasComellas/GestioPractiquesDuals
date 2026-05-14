@@ -1,15 +1,32 @@
 @inherits LayoutComponentBase
 
 <MudLayout>
-    <MudAppBar Elevation="1" Dense="true" Class="app-shell">
-        <MudText Typo="Typo.h6">Gestió de les pràctiques Duals</MudText>
+    <MudAppBar Elevation="0" Dense="true" Class="app-shell">
+        <MudImage Src="/favicon.ico" Alt="Salesians Sarrià" Class="brand-mark" />
+        <MudStack Spacing="0" Class="brand-copy">
+            <MudText Typo="Typo.h6" Class="brand-title">salesians</MudText>
+            <MudText Typo="Typo.caption" Class="brand-subtitle">SARRIÀ</MudText>
+        </MudStack>
+
         <MudSpacer />
-        <MudChip T="string" Color="Color.Error" Variant="Variant.Filled">Fase 2</MudChip>
+
+        <MudChip T="string" Color="Color.Default" Variant="Variant.Text" Class="role-chip">Admin</MudChip>
+        <MudText Typo="Typo.body1" Class="user-name">Josep Tomàs Comellas</MudText>
+        <MudIconButton Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.Palette" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.DarkMode" Color="Color.Inherit" />
+        <MudAvatar Size="Size.Medium" Class="user-avatar">JT</MudAvatar>
     </MudAppBar>
 
     <MudMainContent Class="main-content">
         @Body
     </MudMainContent>
+
+    <footer class="app-footer">
+        <span>Salesians de Sarrià · Dept. d'Informàtica</span>
+        <span>Gestió de les pràctiques Duals · V:0.2.0</span>
+    </footer>
 </MudLayout>
 
 <div id="blazor-error-ui" data-nosnippet>

@@ -1,12 +1,103 @@
-.hero {
-    background: linear-gradient(135deg, rgba(30,44,69,0.96), rgba(53,70,100,0.92));
-    color: white;
-    border-radius: 24px;
+.dashboard-shell {
+    padding: 1.6rem 1.8rem 2rem;
 }
 
-.kpi-card {
-    min-height: 180px;
-    border-radius: 18px;
+.dashboard-header {
+    margin-bottom: 1.15rem;
+}
+
+.welcome-title {
+    color: #43484f;
+    font-weight: 400;
+}
+
+.kpi-grid,
+.filters-grid {
+    margin-bottom: 1rem;
+}
+
+.stat-card {
+    min-height: 138px;
+    border-radius: 14px;
     background: rgba(255,255,255,0.92);
-    box-shadow: 0 10px 30px rgba(30, 44, 69, 0.08);
+    border: 1px solid rgba(31, 43, 67, 0.06);
+    box-shadow: 0 8px 22px rgba(31, 43, 67, 0.06);
+}
+
+.toggle-zone {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    min-height: 56px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #4f545b;
+    font-weight: 700;
+    margin: 1.1rem 0 0.85rem;
+}
+
+.activity-card,
+.closed-card {
+    border-radius: 14px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(31, 43, 67, 0.08);
+    box-shadow: 0 10px 24px rgba(31, 43, 67, 0.06);
+}
+
+.activity-card {
+    min-height: 328px;
+}
+
+.closed-card {
+    min-height: 148px;
+    background: rgba(255, 219, 219, 0.75);
+    border-color: rgba(214, 17, 33, 0.24);
+}
+
+.muted {
+    color: #667085;
+}
+
+.progress-rail {
+    width: 100%;
+    height: 4px;
+    border-radius: 999px;
+    background: #f5d8a6;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 48%;
+    height: 100%;
+    background: #f59e0b;
+}
+
+.mt-6 {
+    margin-top: 2rem;
+}
+
+.closed-title {
+    margin-top: 1.7rem;
+}
+
+@media (max-width: 960px) {
+    .dashboard-header {
+        gap: 1rem;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .toggle-zone {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-shell {
+        padding: 1rem 1rem 1.5rem;
+    }
 }

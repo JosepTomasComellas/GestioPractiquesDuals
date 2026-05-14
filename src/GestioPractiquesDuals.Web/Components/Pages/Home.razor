@@ -2,59 +2,130 @@
 
 <PageTitle>Gestió de les pràctiques Duals</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.False" Class="pa-6">
-    <MudGrid Spacing="4">
-        <MudItem xs="12">
-            <MudPaper Class="hero pa-8">
-                <MudText Typo="Typo.h3" Class="mb-2">Gestió de les pràctiques Duals</MudText>
-                <MudText Typo="Typo.subtitle1" Class="mb-4">
-                    Inici de la fase 2 amb base visual corregida, identitat inicial i arquitectura simple sobre PostgreSQL, Docker i MCP.
-                </MudText>
-                <MudStack Row="true" Spacing="2">
-                    <MudChip T="string" Color="Color.Primary" Variant="Variant.Filled">Blazor</MudChip>
-                    <MudChip T="string" Color="Color.Secondary" Variant="Variant.Filled">API .NET 10</MudChip>
-                    <MudChip T="string" Color="Color.Success" Variant="Variant.Filled">PostgreSQL</MudChip>
-                    <MudChip T="string" Color="Color.Error" Variant="Variant.Filled">MudBlazor</MudChip>
+<MudContainer MaxWidth="MaxWidth.False" Class="dashboard-shell">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="dashboard-header">
+        <MudText Typo="Typo.h3" Class="welcome-title">Benvingut/da, Josep Tomàs Comellas</MudText>
+        <MudStack Row="true" Spacing="2">
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Bookmarks">GESTIÓ DE CLASSES</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Add">NOVA ACTIVITAT</MudButton>
+        </MudStack>
+    </MudStack>
+
+    <MudGrid Spacing="3" Class="kpi-grid">
+        @foreach (var card in SummaryCards)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="2">
+                <MudPaper Class="stat-card pa-4">
+                    <MudIcon Icon="@card.Icon" Size="Size.Medium" Style="@($"color:{card.Color};")" />
+                    <MudText Typo="Typo.h4" Style="@($"color:{card.Color};")">@card.Value</MudText>
+                    <MudText Typo="Typo.body2">@card.Label</MudText>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudGrid Spacing="2" Class="filters-grid">
+        <MudItem xs="12" md="3">
+            <MudTextField T="string" Variant="Variant.Outlined" Placeholder="Cercar activitat" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" FullWidth="true" />
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="string" @bind-Value="_selectedClass" Variant="Variant.Outlined" FullWidth="true">
+                <MudSelectItem T="string" Value="@("Totes les classes")">Totes les classes</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="string" @bind-Value="_selectedModule" Variant="Variant.Outlined" FullWidth="true">
+                <MudSelectItem T="string" Value="@("Tots els mòduls")">Tots els mòduls</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="3" Class="toggle-zone">
+            <MudSwitch T="bool" Label="Només obertes" Color="Color.Success" />
+            <MudSwitch T="bool" Label="Arxivades" Color="Color.Default" />
+        </MudItem>
+    </MudGrid>
+
+    <MudText Typo="Typo.h5" Class="section-title">
+        <MudIcon Icon="@Icons.Material.Filled.LockOpen" Size="Size.Small" Style="color:#42c96d;" />
+        Activitats obertes (1)
+    </MudText>
+
+    <MudGrid Spacing="3">
+        <MudItem xs="12" md="8" lg="6">
+            <MudPaper Class="activity-card pa-4">
+                <MudText Typo="Typo.h5" Class="mb-1">0000</MudText>
+                <MudText Typo="Typo.body2" Class="muted mb-4">0369 - Implantació de sistemes operatius · S1SX · Josep Tomàs Comellas (Admin)</MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">Prova</MudText>
+
+                <MudStack Row="true" Spacing="1" Class="mb-3">
+                    <MudChip T="string" Variant="Variant.Outlined">1 grups</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined">2 alumnes</MudChip>
+                    <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled">1 / 2 avaluat</MudChip>
+                </MudStack>
+
+                <div class="progress-rail">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mt-4">
+                    <MudStack Row="true" Spacing="2">
+                        <MudButton Variant="Variant.Text" Color="Color.Error">RESULTATS</MudButton>
+                        <MudButton Variant="Variant.Text" Color="Color.Default">GRUPS</MudButton>
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" />
+                        <MudIconButton Icon="@Icons.Material.Filled.BarChart" Color="Color.Error" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Campaign" Color="Color.Info" />
+                    </MudStack>
+                    <MudIconButton Icon="@Icons.Material.Filled.MoreVert" />
                 </MudStack>
             </MudPaper>
         </MudItem>
+    </MudGrid>
 
-        <MudItem xs="12" md="4">
-            <MudPaper Class="kpi-card pa-4">
-                <MudText Typo="Typo.overline">Projecte</MudText>
-                <MudText Typo="Typo.h5">Fase 2 iniciada</MudText>
-                <MudText Typo="Typo.body2">Base visual corregida, domini inicial i desplegament preparat per créixer.</MudText>
-            </MudPaper>
-        </MudItem>
+    <MudText Typo="Typo.h5" Class="section-title closed-title">
+        <MudIcon Icon="@Icons.Material.Filled.Lock" Size="Size.Small" Style="color:#73767d;" />
+        Activitats tancades (4)
+    </MudText>
 
-        <MudItem xs="12" md="4">
-            <MudPaper Class="kpi-card pa-4">
-                <MudText Typo="Typo.overline">Persistència</MudText>
-                <MudText Typo="Typo.h5">PostgreSQL portable</MudText>
-                <MudText Typo="Typo.body2">Preparada per externalitzar la base de dades sense reestructurar el codi.</MudText>
-            </MudPaper>
-        </MudItem>
-
-        <MudItem xs="12" md="4">
-            <MudPaper Class="kpi-card pa-4">
-                <MudText Typo="Typo.overline">Extensibilitat</MudText>
-                <MudText Typo="Typo.h5">MCP preparat</MudText>
-                <MudText Typo="Typo.body2">Capa reservada per a consultes segures i evolucions futures.</MudText>
-            </MudPaper>
-        </MudItem>
-
-        <MudItem xs="12">
-            <MudPaper Class="pa-6 mt-2">
-                <MudText Typo="Typo.h5" Class="mb-3">Fase 2: identitat i rols</MudText>
-                <MudText Typo="Typo.body1" Class="mb-2">
-                    Aquesta iteració obre el bloc funcional d'identitat amb els rols base del sistema: Administrador, Gestor, Professor/Tutor i Alumne.
-                </MudText>
-                <MudList T="string" Dense="true">
-                    <MudListItem T="string">Autenticació prevista amb correu electrònic de l'escola</MudListItem>
-                    <MudListItem T="string">Contrasenya gestionada pel sistema</MudListItem>
-                    <MudListItem T="string">Base preparada per continuar amb permisos i fluxos d'accés</MudListItem>
-                </MudList>
-            </MudPaper>
-        </MudItem>
+    <MudGrid Spacing="3">
+        @foreach (var closed in ClosedActivities)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Class="closed-card pa-4">
+                    <MudText Typo="Typo.h6">@closed.Code</MudText>
+                    <MudText Typo="Typo.body2">@closed.Name</MudText>
+                    <MudText Typo="Typo.caption" Class="muted">@closed.Detail</MudText>
+                    <MudStack Row="true" Justify="Justify.SpaceBetween" Class="mt-6">
+                        <MudIcon Icon="@Icons.Material.Filled.Badge" Style="color:#d84c3e;" />
+                        <MudIcon Icon="@Icons.Material.Filled.MoreVert" />
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+        }
     </MudGrid>
 </MudContainer>
+
+@code {
+    private string _selectedClass = "Totes les classes";
+    private string _selectedModule = "Tots els mòduls";
+
+    private readonly SummaryCard[] SummaryCards =
+    [
+        new("4", "Classes", Icons.Material.Filled.Book, "#243452"),
+        new("5", "Mòduls", Icons.Material.Filled.MenuBook, "#243452"),
+        new("111", "Alumnes", Icons.Material.Filled.Groups, "#3b82f6"),
+        new("5", "Activitats", Icons.Material.Filled.Badge, "#d61121"),
+        new("1", "Obertes ara", Icons.Material.Filled.LockOpen, "#42c96d"),
+        new("33", "Grups", Icons.Material.Filled.GroupWork, "#f59e0b")
+    ];
+
+    private readonly ClosedActivity[] ClosedActivities =
+    [
+        new("PRJ01", "PRJ0 - Proyecto Mayo · S1AM", ""),
+        new("MONGODB", "0484 - Base de Dades · S1AM", ""),
+        new("PRJ1 - Projecte d'Apps", "0489 - Programació multimèdia i dispositius", ""),
+        new("Projecte 1 - Adm. SGBD", "0377 - Adm. de SGBD · S1SX", "")
+    ];
+
+    private sealed record SummaryCard(string Value, string Label, string Icon, string Color);
+
+    private sealed record ClosedActivity(string Code, string Name, string Detail);
+}

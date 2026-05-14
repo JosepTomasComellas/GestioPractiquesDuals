@@ -1,13 +1,84 @@
 .app-shell {
-    background: #1e2c45;
+    background: #1f2b43;
     color: white;
+    min-height: 66px;
+    padding-inline: 1.3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: white;
+    object-fit: contain;
+    padding: 4px;
+}
+
+.brand-copy {
+    margin-left: 0.8rem;
+}
+
+.brand-title {
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+}
+
+.brand-subtitle {
+    color: rgba(255, 255, 255, 0.72);
+    letter-spacing: 0.12em;
+}
+
+.role-chip {
+    color: rgba(255,255,255,0.92);
+    background: rgba(255,255,255,0.12);
+    margin-right: 0.8rem;
+}
+
+.user-name {
+    margin-right: 0.4rem;
+    font-weight: 500;
+}
+
+.user-avatar {
+    margin-left: 0.4rem;
+    background: #ffffff;
+    color: #1f2b43;
+    font-weight: 700;
 }
 
 .main-content {
-    min-height: 100vh;
+    min-height: calc(100vh - 108px);
     background:
-        linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
+        linear-gradient(rgba(252,252,252,0.9), rgba(252,252,252,0.9)),
         url('/backgrounds/salesians.png') center/cover no-repeat fixed;
+}
+
+.app-footer {
+    min-height: 42px;
+    background: #1f2b43;
+    color: rgba(255,255,255,0.82);
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.88rem;
+    padding: 0.7rem 1rem;
+}
+
+@media (max-width: 900px) {
+    .user-name,
+    .role-chip {
+        display: none;
+    }
+
+    .app-footer {
+        flex-direction: column;
+        gap: 0.25rem;
+        text-align: center;
+    }
 }
 
 #blazor-error-ui {

@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.2.0`
+Versió actual del producte: `V:0.2.1`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
