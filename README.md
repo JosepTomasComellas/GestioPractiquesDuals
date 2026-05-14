@@ -1,6 +1,6 @@
 # Gestió de les pràctiques Duals
 
-Versió actual del producte: `V:0.3.2`
+Versió actual del producte: `V:0.3.3`
 
 Projecte per a la gestió de les pràctiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
 

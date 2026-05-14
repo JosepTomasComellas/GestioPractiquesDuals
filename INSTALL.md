@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.3.2`
+Versió actual del producte: `V:0.3.3`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -174,6 +174,7 @@ Canvi actual:
 - `V:0.3.0`: s'activa identitat amb `ASP.NET Core Identity`, migracions i login inicial.
 - `V:0.3.1`: l'administrador bootstrap i el domini escolar passen a configuració externa via `.env`.
 - `V:0.3.2`: els certificats es mantenen fora de Git i el `deploy-lxc.sh` local es sobreescriu abans de cada `pull`.
+- `V:0.3.3`: la redirecció d'autenticació de la web es fixa a `/login` en lloc de `/Account/Login`.
 
 ## Estat actual
 
