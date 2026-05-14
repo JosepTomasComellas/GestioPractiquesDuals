@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
-    <Version>0.3.7</Version>
-    <AssemblyVersion>0.3.7.0</AssemblyVersion>
-    <FileVersion>0.3.7.0</FileVersion>
-    <InformationalVersion>V:0.3.7</InformationalVersion>
+    <Version>0.3.8</Version>
+    <AssemblyVersion>0.3.8.0</AssemblyVersion>
+    <FileVersion>0.3.8.0</FileVersion>
+    <InformationalVersion>V:0.3.8</InformationalVersion>
     <Company>Salesians de Sarrià</Company>
     <Product>Gestió de les pràctiques Duals</Product>
     <Authors>Josep Tomàs Comellas</Authors>

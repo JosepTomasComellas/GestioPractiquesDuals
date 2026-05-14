@@ -21,6 +21,7 @@ public sealed class IdentitySeeder(
     {
         var bootstrapAdmin = bootstrapAdminOptions.Value;
         var school = schoolOptions.Value;
+        ValidateBootstrapAdminConfiguration(bootstrapAdmin);
 
         foreach (var role in Enum.GetValues<UserRole>())
         {
@@ -61,6 +62,41 @@ public sealed class IdentitySeeder(
             studentId: student.Id);
 
         logger.LogInformation("Sembrat inicial d'identitat completat.");
+    }
+
+    private static void ValidateBootstrapAdminConfiguration(BootstrapAdminOptions bootstrapAdmin)
+    {
+        var password = bootstrapAdmin.Password ?? string.Empty;
+        var errors = new List<string>();
+
+        if (password.Length < 10)
+        {
+            errors.Add("ha de tenir com a mínim 10 caràcters");
+        }
+
+        if (!password.Any(char.IsUpper))
+        {
+            errors.Add("ha de contenir almenys una majúscula");
+        }
+
+        if (!password.Any(char.IsLower))
+        {
+            errors.Add("ha de contenir almenys una minúscula");
+        }
+
+        if (!password.Any(char.IsDigit))
+        {
+            errors.Add("ha de contenir almenys un número");
+        }
+
+        if (errors.Count == 0)
+        {
+            return;
+        }
+
+        throw new InvalidOperationException(
+            "La variable BOOTSTRAP_ADMIN_PASSWORD del fitxer .env no compleix la política d'accés: "
+            + string.Join(", ", errors) + ".");
     }
 
     private static string NormalizeAdminEmail(string configuredEmail, string schoolDomain)

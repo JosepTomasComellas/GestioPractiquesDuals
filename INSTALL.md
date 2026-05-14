@@ -108,6 +108,13 @@ Variables especialment importants:
 - `BOOTSTRAP_ADMIN_DISPLAY_NAME=Administrador Duals`
 - `BOOTSTRAP_ADMIN_PASSWORD=...`
 
+La contrasenya de `BOOTSTRAP_ADMIN_PASSWORD` ha de complir aquests mínims:
+
+- com a mínim 10 caràcters
+- almenys una majúscula
+- almenys una minúscula
+- almenys un número
+
 Els certificats de `deploy/docker/certs/` no es versionen. Pots mantenir-hi `fullchain.pem` i `privkey.pem` locals sense que interfereixin amb les actualitzacions del repositori.
 
 ## Serveis previstos
@@ -179,6 +186,7 @@ Canvi actual:
 - `V:0.3.5`: es refà el login amb `POST` real al servidor i una interfície més propera a la referència AutoCo.
 - `V:0.3.6`: la redirecció al login passa a ser relativa i preserva el host/port originals del navegador.
 - `V:0.3.7`: la pantalla de login deixa de fer crides HTTPS internes i mostra la configuració bootstrap directament des d'opcions.
+- `V:0.3.8`: es valida explícitament `BOOTSTRAP_ADMIN_PASSWORD` i es mostra un error clar si el `.env` no compleix la política d'Identity.
 
 ## Estat actual
 

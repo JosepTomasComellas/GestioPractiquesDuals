@@ -106,6 +106,8 @@ Variables principals:
 - `BOOTSTRAP_ADMIN_DISPLAY_NAME`
 - `BOOTSTRAP_ADMIN_PASSWORD`
 
+La contrasenya bootstrap ha de tenir com a mínim 10 caràcters, una majúscula, una minúscula i un número.
+
 En desplegament, el fitxer `deploy/docker/deploy-lxc.sh` es restaura automàticament abans del `pull` perquè la versió del repositori prevalgui sobre canvis locals accidentals. Els certificats `fullchain.pem` i `privkey.pem` queden fora del control de versions.
 
 ## Situació Git actual
