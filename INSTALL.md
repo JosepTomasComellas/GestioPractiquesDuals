@@ -1,6 +1,6 @@
 # INSTALL
 
-Versio actual del producte: `V:0.1.2`
+Versio actual del producte: `V:0.1.3`
 
 Aquest document descriu la instal.lacio i posada en marxa inicial de **Gestio de les practiques Duals**.
 
@@ -98,6 +98,15 @@ El script:
 - `web`: frontend Blazor
 - `nginx`: reverse proxy d'entrada
 
+## Ports
+
+Configuracio actual recomanada:
+
+- `nginx` publica `443:443` dins la maquina/LXC
+- la publicacio externa cap a Internet es pot fer com `4444 -> 443`
+
+Aixo permet que la solucio treballi internament en el port HTTPS estandard i que la redireccio externa es faci des del router, firewall o reverse proxy superior.
+
 ## Certificats
 
 La carpeta `deploy/docker/certs` queda reservada per als certificats del reverse proxy. En l'estat actual hi ha un `.gitkeep`, i caldra afegir-hi els certificats reals en entorns de pilot o produccio.
@@ -128,6 +137,7 @@ Canvi actual:
 
 - `V:0.1.1`: s'afegeix script de desplegament/actualitzacio per entorn LXC.
 - `V:0.1.2`: s'ajusta la ruta objectiu de desplegament a `/docker/GestioPractiquesDuals`.
+- `V:0.1.3`: s'ajusta el desplegament per exposar el port 443 a la maquina/LXC.
 
 ## Publicacio a GitHub
 

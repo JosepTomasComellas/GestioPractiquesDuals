@@ -1,6 +1,6 @@
 # Gestio de les practiques Duals
 
-Versio actual del producte: `V:0.1.2`
+Versio actual del producte: `V:0.1.3`
 
 Projecte per a la gestio de les practiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
 
@@ -51,6 +51,11 @@ El script permet:
 Ruta objectiu de desplegament acordada:
 
 - `/docker/GestioPractiquesDuals`
+
+Configuracio de port acordada:
+
+- la maquina/LXC exposa `443`
+- la publicacio externa a Internet es pot mapar a `4444`
 
 ## Versionat del producte
 
