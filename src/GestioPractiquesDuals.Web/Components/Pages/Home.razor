@@ -10,7 +10,7 @@
         <MudText Typo="Typo.h3" Class="welcome-title">@_dashboard.WelcomeMessage</MudText>
         <MudStack Row="true" Spacing="2" Class="dashboard-actions">
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Bookmarks" Class="toolbar-button toolbar-button-secondary" Href="/classes/manage">GESTIÓ DE CLASSES</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Add" Class="toolbar-button toolbar-button-primary" Href="/activities">NOVA ACTIVITAT</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Assignment" Class="toolbar-button toolbar-button-primary" Href="/activities">SEGUIMENT</MudButton>
         </MudStack>
     </MudStack>
 
@@ -94,13 +94,10 @@
 
                     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mt-4">
                         <MudStack Row="true" Spacing="2" Class="activity-actions">
-                            <MudButton Variant="Variant.Text" Color="Color.Error" Class="activity-link activity-link-primary" Href="/activities">RESULTATS</MudButton>
-                            <MudButton Variant="Variant.Text" Color="Color.Default" Class="activity-link" Href="/classes/manage">GRUPS</MudButton>
-                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Class="activity-icon" Href="/activities" />
-                            <MudIconButton Icon="@Icons.Material.Filled.BarChart" Color="Color.Error" Class="activity-icon" Href="/activities" />
-                            <MudIconButton Icon="@Icons.Material.Filled.Campaign" Color="Color.Info" Class="activity-icon" Href="/cycles/manage" />
+                            <MudButton Variant="Variant.Text" Color="Color.Error" Class="activity-link activity-link-primary" Href="/activities">SEGUIMENT</MudButton>
+                            <MudButton Variant="Variant.Text" Color="Color.Default" Class="activity-link" Href="/classes/manage">CLASSE</MudButton>
+                            <MudButton Variant="Variant.Text" Color="Color.Default" Class="activity-link" Href="/cycles/manage">CICLE</MudButton>
                         </MudStack>
-                        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Class="more-button" Href="/activities" />
                     </MudStack>
                 </MudPaper>
             </MudItem>
@@ -120,9 +117,9 @@
                     <MudText Typo="Typo.h6" Class="closed-code">@closed.Code</MudText>
                     <MudText Typo="Typo.body2" Class="closed-title-text">@closed.Title</MudText>
                     <MudText Typo="Typo.caption" Class="muted">@closed.Subtitle</MudText>
-                    <MudStack Row="true" Justify="Justify.SpaceBetween" Class="mt-6">
-                        <MudIcon Icon="@Icons.Material.Filled.Badge" Style="color:#d84c3e;" />
-                        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Class="closed-more" Href="/activities" />
+                    <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mt-6">
+                        <MudChip T="string" Variant="Variant.Outlined" Class="info-chip">Tancada</MudChip>
+                        <MudButton Variant="Variant.Text" Color="Color.Default" Class="activity-link" Href="/activities">DETALL</MudButton>
                     </MudStack>
                 </MudPaper>
             </MudItem>

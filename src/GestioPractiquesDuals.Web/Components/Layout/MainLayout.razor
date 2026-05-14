@@ -14,14 +14,7 @@
                     <div class="top-actions">
                         <MudChip T="string" Color="Color.Default" Variant="Variant.Filled" Class="role-chip">@GetRoleLabel(context.User)</MudChip>
                         <MudText Typo="Typo.body1" Class="user-name">@GetDisplayName(context.User)</MudText>
-                        <span class="notification-dot"></span>
-                        <MudIconButton Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" Class="top-icon" />
-                        <MudIconButton Icon="@Icons.Material.Filled.MapsHomeWork" Color="Color.Inherit" Class="top-icon" />
-                        <MudIconButton Icon="@Icons.Material.Filled.HelpOutline" Color="Color.Inherit" Class="top-icon" />
                         <MudAvatar Size="Size.Medium" Class="user-avatar">@GetInitials(context.User)</MudAvatar>
-                        <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="Color.Inherit" Class="top-icon" />
-                        <MudIconButton Icon="@Icons.Material.Filled.Palette" Color="Color.Inherit" Class="top-icon" />
-                        <MudIconButton Icon="@Icons.Material.Filled.DarkMode" Color="Color.Inherit" Class="top-icon" />
                         <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Class="top-icon" Href="/auth/logout" />
                     </div>
                 </Authorized>

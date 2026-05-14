@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.4.2`
+Versió actual del producte: `V:0.4.3`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -222,6 +222,7 @@ Canvi actual:
 - `V:0.4.0`: s'afegeixen els mòduls `Gestió de classes` i `Cicles i tutors`, amb control d'obertura del formulari per classe.
 - `V:0.4.1`: s'activa un `mode de proves` per entrar sense login i es crea la pantalla `Activitats i seguiment`.
 - `V:0.4.2`: es corregeixen dimensions, branding i espaiats del shell principal i de les pantalles acadèmiques.
+- `V:0.4.3`: es neteja la interfície i es retiren controls genèrics o placeholders que no formen part del flux actual de Duals.
 
 ## Estat actual
 
