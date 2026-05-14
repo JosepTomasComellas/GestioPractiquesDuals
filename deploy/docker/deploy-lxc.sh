@@ -7,6 +7,8 @@ APP_DIR="${APP_DIR:-/docker/GestioPractiquesDuals}"
 BRANCH="${BRANCH:-main}"
 COMPOSE_DIR="${COMPOSE_DIR:-$APP_DIR/deploy/docker}"
 COMPOSE_FILE="${COMPOSE_FILE:-$COMPOSE_DIR/docker-compose.yml}"
+ENV_FILE="${ENV_FILE:-$COMPOSE_DIR/.env}"
+ENV_EXAMPLE_FILE="${ENV_EXAMPLE_FILE:-$COMPOSE_DIR/.env.example}"
 SKIP_GIT_PULL="${SKIP_GIT_PULL:-0}"
 
 log() {
@@ -53,6 +55,22 @@ validate_compose() {
   [[ -f "$COMPOSE_FILE" ]] || fail "No s'ha trobat el fitxer docker compose a $COMPOSE_FILE"
 }
 
+ensure_env_file() {
+  if [[ -f "$ENV_FILE" ]]; then
+    log "Fitxer d'entorn detectat a $ENV_FILE"
+    return
+  fi
+
+  if [[ -f "$ENV_EXAMPLE_FILE" ]]; then
+    cp "$ENV_EXAMPLE_FILE" "$ENV_FILE"
+    log "S'ha creat $ENV_FILE a partir de .env.example"
+    log "Revisa especialment el correu i la contrasenya inicial de l'administrador."
+    return
+  fi
+
+  fail "No s'ha trobat ni $ENV_FILE ni $ENV_EXAMPLE_FILE"
+}
+
 show_certificate_warning() {
   local cert_dir="$COMPOSE_DIR/certs"
   if [[ ! -f "$cert_dir/fullchain.pem" || ! -f "$cert_dir/privkey.pem" ]]; then
@@ -83,6 +101,7 @@ main() {
   ensure_repo
   update_repo
   validate_compose
+  ensure_env_file
   show_certificate_warning
   deploy_stack
   show_status

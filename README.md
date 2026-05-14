@@ -1,6 +1,6 @@
 # Gestió de les pràctiques Duals
 
-Versió actual del producte: `V:0.3.0`
+Versió actual del producte: `V:0.3.1`
 
 Projecte per a la gestió de les pràctiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
 
@@ -93,6 +93,18 @@ Quan la base de dades arrenca correctament i s'apliquen les migracions, la web c
 - contrasenya: `Duals.Admin.2026!`
 
 També es creen usuaris inicials associats al professor i a l'alumne demo sembrats a la base de dades.
+
+La identitat inicial de l'administrador ja no queda fixa al codi. En desplegament es configura des de:
+
+- [deploy/docker/.env.example](deploy/docker/.env.example)
+- i al servidor des de `deploy/docker/.env`
+
+Variables principals:
+
+- `SCHOOL_EMAIL_DOMAIN`
+- `BOOTSTRAP_ADMIN_EMAIL`
+- `BOOTSTRAP_ADMIN_DISPLAY_NAME`
+- `BOOTSTRAP_ADMIN_PASSWORD`
 
 ## Situació Git actual
 

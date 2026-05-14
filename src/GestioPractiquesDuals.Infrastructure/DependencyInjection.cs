@@ -19,6 +19,8 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<PostgresOptions>(configuration.GetSection(PostgresOptions.SectionName));
+        services.Configure<BootstrapAdminOptions>(configuration.GetSection(BootstrapAdminOptions.SectionName));
+        services.Configure<SchoolOptions>(configuration.GetSection(SchoolOptions.SectionName));
 
         var connectionString =
             configuration.GetSection(PostgresOptions.SectionName).Get<PostgresOptions>()?.ConnectionString

@@ -1,9 +1,11 @@
 using GestioPractiquesDuals.Domain.Entities;
 using GestioPractiquesDuals.Infrastructure.Persistence;
+using GestioPractiquesDuals.Infrastructure.Options;
 using GestioPractiquesDuals.Shared.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace GestioPractiquesDuals.Infrastructure.Identity;
 
@@ -11,10 +13,15 @@ public sealed class IdentitySeeder(
     DualsDbContext dbContext,
     RoleManager<IdentityRole<Guid>> roleManager,
     UserManager<ApplicationUser> userManager,
+    IOptions<BootstrapAdminOptions> bootstrapAdminOptions,
+    IOptions<SchoolOptions> schoolOptions,
     ILogger<IdentitySeeder> logger)
 {
     public async Task SeedAsync(CancellationToken cancellationToken = default)
     {
+        var bootstrapAdmin = bootstrapAdminOptions.Value;
+        var school = schoolOptions.Value;
+
         foreach (var role in Enum.GetValues<UserRole>())
         {
             var roleName = role.ToRoleName();
@@ -27,9 +34,9 @@ public sealed class IdentitySeeder(
 
         var teacher = await dbContext.Teachers.FirstAsync(cancellationToken);
         await EnsureUserAsync(
-            email: "admin.duals@salesianssarria.test",
-            displayName: "Administrador Duals",
-            password: "Duals.Admin.2026!",
+            email: NormalizeAdminEmail(bootstrapAdmin.Email, school.EmailDomain),
+            displayName: bootstrapAdmin.DisplayName,
+            password: bootstrapAdmin.Password,
             roles: [UserRole.Administrator.ToRoleName()],
             teacherId: null,
             studentId: null);
@@ -54,6 +61,16 @@ public sealed class IdentitySeeder(
             studentId: student.Id);
 
         logger.LogInformation("Sembrat inicial d'identitat completat.");
+    }
+
+    private static string NormalizeAdminEmail(string configuredEmail, string schoolDomain)
+    {
+        if (string.IsNullOrWhiteSpace(configuredEmail))
+        {
+            return $"admin.duals@{schoolDomain}";
+        }
+
+        return configuredEmail.Trim();
     }
 
     private async Task EnsureUserAsync(

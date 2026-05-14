@@ -34,6 +34,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       Postgres__ConnectionString: Host=postgres;Port=5432;Database=duals;Username=duals;Password=duals
       ConnectionStrings__Redis: redis:6379
+      School__EmailDomain: ${SCHOOL_EMAIL_DOMAIN:-sarria.salesians.cat}
     depends_on:
       postgres:
         condition: service_healthy
@@ -51,6 +52,10 @@ services:
       Postgres__ConnectionString: Host=postgres;Port=5432;Database=duals;Username=duals;Password=duals
       ConnectionStrings__Redis: redis:6379
       DataProtection__KeysPath: /keys
+      School__EmailDomain: ${SCHOOL_EMAIL_DOMAIN:-sarria.salesians.cat}
+      BootstrapAdmin__Email: ${BOOTSTRAP_ADMIN_EMAIL:-admin.duals@sarria.salesians.cat}
+      BootstrapAdmin__DisplayName: ${BOOTSTRAP_ADMIN_DISPLAY_NAME:-Administrador Duals}
+      BootstrapAdmin__Password: ${BOOTSTRAP_ADMIN_PASSWORD:-Duals.Admin.2026!}
     volumes:
       - data_protection_keys:/keys
     depends_on:

@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.3.0`
+Versió actual del producte: `V:0.3.1`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -65,6 +65,7 @@ Per a entorns LXC es treballara sobre la ruta acordada:
 Script de desplegament/actualitzacio:
 
 - [deploy-lxc.sh](deploy/docker/deploy-lxc.sh)
+- [fitxer .env d'exemple](deploy/docker/.env.example)
 
 Exemple d'us:
 
@@ -89,6 +90,23 @@ El script:
 - comprova que existeixi `docker-compose.yml`;
 - executa `docker compose up -d --build`;
 - mostra l'estat final dels serveis.
+
+## Fitxer `.env`
+
+El desplegament llegeix les variables de configuració externes des de:
+
+- `/docker/GestioPractiquesDuals/deploy/docker/.env`
+
+Si aquest fitxer no existeix, el script el crearà automàticament a partir de:
+
+- `deploy/docker/.env.example`
+
+Variables especialment importants:
+
+- `SCHOOL_EMAIL_DOMAIN=sarria.salesians.cat`
+- `BOOTSTRAP_ADMIN_EMAIL=admin.duals@sarria.salesians.cat`
+- `BOOTSTRAP_ADMIN_DISPLAY_NAME=Administrador Duals`
+- `BOOTSTRAP_ADMIN_PASSWORD=...`
 
 ## Serveis previstos
 
@@ -129,8 +147,8 @@ La web aplica migracions de base de dades a l'arrencada i sembra els rols i usua
 
 Administrador inicial:
 
-- correu: `admin.duals@salesianssarria.test`
-- contrasenya: `Duals.Admin.2026!`
+- correu: valor de `BOOTSTRAP_ADMIN_EMAIL`
+- contrasenya: valor de `BOOTSTRAP_ADMIN_PASSWORD`
 
 Perquè la web pugui arrencar, `PostgreSQL` ha d'estar disponible i accessible amb la `connection string` configurada.
 
@@ -152,6 +170,7 @@ Canvi actual:
 - `V:0.2.0`: s'obre la fase 2 amb millora visual, favicon i base de rols.
 - `V:0.2.1`: el dashboard s'apropa a l'estil AutoCo i prepara millor el shell funcional.
 - `V:0.3.0`: s'activa identitat amb `ASP.NET Core Identity`, migracions i login inicial.
+- `V:0.3.1`: l'administrador bootstrap i el domini escolar passen a configuració externa via `.env`.
 
 ## Estat actual
 
