@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.3.6`
+Versió actual del producte: `V:0.3.7`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -178,6 +178,7 @@ Canvi actual:
 - `V:0.3.4`: es preserva el port extern del reverse proxy amb `ForwardedHeaders` i `Host` reenviat complet.
 - `V:0.3.5`: es refà el login amb `POST` real al servidor i una interfície més propera a la referència AutoCo.
 - `V:0.3.6`: la redirecció al login passa a ser relativa i preserva el host/port originals del navegador.
+- `V:0.3.7`: la pantalla de login deixa de fer crides HTTPS internes i mostra la configuració bootstrap directament des d'opcions.
 
 ## Estat actual
 

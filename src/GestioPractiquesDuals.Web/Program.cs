@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -131,16 +130,6 @@ app.MapGet("/auth/logout", async (SignInManager<ApplicationUser> signInManager) 
 {
     await signInManager.SignOutAsync();
     return Results.LocalRedirect("/login");
-}).AllowAnonymous();
-
-app.MapGet("/auth/bootstrap-admin", (IOptions<BootstrapAdminOptions> options) =>
-{
-    var admin = options.Value;
-    return Results.Json(new
-    {
-        admin.Email,
-        admin.DisplayName
-    });
 }).AllowAnonymous();
 
 app.Run();
