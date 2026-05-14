@@ -9,4 +9,6 @@ TestResults/
 *.cache
 docs/rendered/
 deploy/docker/.env
+deploy/docker/certs/*.pem
+deploy/docker/certs/*.key
 ~$*.docx

@@ -1,6 +1,6 @@
 # Gestió de les pràctiques Duals
 
-Versió actual del producte: `V:0.3.1`
+Versió actual del producte: `V:0.3.2`
 
 Projecte per a la gestió de les pràctiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
 
@@ -105,6 +105,8 @@ Variables principals:
 - `BOOTSTRAP_ADMIN_EMAIL`
 - `BOOTSTRAP_ADMIN_DISPLAY_NAME`
 - `BOOTSTRAP_ADMIN_PASSWORD`
+
+En desplegament, el fitxer `deploy/docker/deploy-lxc.sh` es restaura automàticament abans del `pull` perquè la versió del repositori prevalgui sobre canvis locals accidentals. Els certificats `fullchain.pem` i `privkey.pem` queden fora del control de versions.
 
 ## Situació Git actual
 

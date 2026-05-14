@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.3.1`
+Versió actual del producte: `V:0.3.2`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -108,6 +108,8 @@ Variables especialment importants:
 - `BOOTSTRAP_ADMIN_DISPLAY_NAME=Administrador Duals`
 - `BOOTSTRAP_ADMIN_PASSWORD=...`
 
+Els certificats de `deploy/docker/certs/` no es versionen. Pots mantenir-hi `fullchain.pem` i `privkey.pem` locals sense que interfereixin amb les actualitzacions del repositori.
+
 ## Serveis previstos
 
 - `postgres`: base de dades principal
@@ -171,6 +173,7 @@ Canvi actual:
 - `V:0.2.1`: el dashboard s'apropa a l'estil AutoCo i prepara millor el shell funcional.
 - `V:0.3.0`: s'activa identitat amb `ASP.NET Core Identity`, migracions i login inicial.
 - `V:0.3.1`: l'administrador bootstrap i el domini escolar passen a configuració externa via `.env`.
+- `V:0.3.2`: els certificats es mantenen fora de Git i el `deploy-lxc.sh` local es sobreescriu abans de cada `pull`.
 
 ## Estat actual
 

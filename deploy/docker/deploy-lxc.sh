@@ -47,6 +47,10 @@ update_repo() {
 
   log "Actualitzant codi des de la branca $BRANCH"
   git -C "$APP_DIR" fetch origin
+  if git -C "$APP_DIR" status --short -- deploy/docker/deploy-lxc.sh | grep -q .; then
+    log "Es restaura la versio publicada de deploy-lxc.sh abans de fer pull"
+    git -C "$APP_DIR" restore deploy/docker/deploy-lxc.sh
+  fi
   git -C "$APP_DIR" checkout "$BRANCH"
   git -C "$APP_DIR" pull --ff-only origin "$BRANCH"
 }
