@@ -1,14 +1,14 @@
 @page "/"
 
-<PageTitle>Gestio de les practiques Duals</PageTitle>
+<PageTitle>Gestió de les pràctiques Duals</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.False" Class="pa-6">
     <MudGrid Spacing="4">
         <MudItem xs="12">
             <MudPaper Class="hero pa-8">
-                <MudText Typo="Typo.h3" Class="mb-2">Gestio de les practiques Duals</MudText>
+                <MudText Typo="Typo.h3" Class="mb-2">Gestió de les pràctiques Duals</MudText>
                 <MudText Typo="Typo.subtitle1" Class="mb-4">
-                    Base inicial de la fase 1 amb arquitectura simple, PostgreSQL, Docker i suport preparat per MCP.
+                    Inici de la fase 2 amb base visual corregida, identitat inicial i arquitectura simple sobre PostgreSQL, Docker i MCP.
                 </MudText>
                 <MudStack Row="true" Spacing="2">
                     <MudChip T="string" Color="Color.Primary" Variant="Variant.Filled">Blazor</MudChip>
@@ -22,14 +22,14 @@
         <MudItem xs="12" md="4">
             <MudPaper Class="kpi-card pa-4">
                 <MudText Typo="Typo.overline">Projecte</MudText>
-                <MudText Typo="Typo.h5">Fase 1 iniciada</MudText>
-                <MudText Typo="Typo.body2">Esquelet de solucio, domini inicial i desplegament base.</MudText>
+                <MudText Typo="Typo.h5">Fase 2 iniciada</MudText>
+                <MudText Typo="Typo.body2">Base visual corregida, domini inicial i desplegament preparat per créixer.</MudText>
             </MudPaper>
         </MudItem>
 
         <MudItem xs="12" md="4">
             <MudPaper Class="kpi-card pa-4">
-                <MudText Typo="Typo.overline">Persistencia</MudText>
+                <MudText Typo="Typo.overline">Persistència</MudText>
                 <MudText Typo="Typo.h5">PostgreSQL portable</MudText>
                 <MudText Typo="Typo.body2">Preparada per externalitzar la base de dades sense reestructurar el codi.</MudText>
             </MudPaper>
@@ -39,7 +39,21 @@
             <MudPaper Class="kpi-card pa-4">
                 <MudText Typo="Typo.overline">Extensibilitat</MudText>
                 <MudText Typo="Typo.h5">MCP preparat</MudText>
-                <MudText Typo="Typo.body2">Capa reservada per consultes segures i evolucions futures.</MudText>
+                <MudText Typo="Typo.body2">Capa reservada per a consultes segures i evolucions futures.</MudText>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPaper Class="pa-6 mt-2">
+                <MudText Typo="Typo.h5" Class="mb-3">Fase 2: identitat i rols</MudText>
+                <MudText Typo="Typo.body1" Class="mb-2">
+                    Aquesta iteració obre el bloc funcional d'identitat amb els rols base del sistema: Administrador, Gestor, Professor/Tutor i Alumne.
+                </MudText>
+                <MudList T="string" Dense="true">
+                    <MudListItem T="string">Autenticació prevista amb correu electrònic de l'escola</MudListItem>
+                    <MudListItem T="string">Contrasenya gestionada pel sistema</MudListItem>
+                    <MudListItem T="string">Base preparada per continuar amb permisos i fluxos d'accés</MudListItem>
+                </MudList>
             </MudPaper>
         </MudItem>
     </MudGrid>

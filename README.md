@@ -1,13 +1,13 @@
 # Gestio de les practiques Duals
 
-Versio actual del producte: `V:0.1.3`
+Versió actual del producte: `V:0.2.0`
 
-Projecte per a la gestio de les practiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
+Projecte per a la gestió de les pràctiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
 
 ## Estat actual
 
-- Fase en curs: `Fase 1`
-- Estat: esquelet base creat i compilable
+- Fase en curs: `Fase 2`
+- Estat: base visual corregida i bloc inicial d'identitat en marxa
 - Compatibilitat objectiu: `Visual Studio 2026` o posterior
 - Base de dades inicial: `PostgreSQL`
 - Criteri d'implementacio: simplicitat, mantenibilitat i portabilitat

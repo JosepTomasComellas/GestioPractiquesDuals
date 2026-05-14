@@ -1,7 +1,9 @@
 using GestioPractiquesDuals.Application.Overview;
+using GestioPractiquesDuals.Application.Security;
 using GestioPractiquesDuals.Infrastructure.Options;
 using GestioPractiquesDuals.Infrastructure.Overview;
 using GestioPractiquesDuals.Infrastructure.Persistence;
+using GestioPractiquesDuals.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +26,7 @@ public static class DependencyInjection
         var redisConnectionString = configuration.GetConnectionString("Redis") ?? "localhost:6379";
         services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(redisConnectionString));
         services.AddScoped<IOverviewService, OverviewService>();
+        services.AddScoped<IIdentityOverviewService, IdentityOverviewService>();
 
         return services;
     }

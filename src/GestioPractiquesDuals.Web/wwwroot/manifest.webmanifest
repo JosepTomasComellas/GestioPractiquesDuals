@@ -1,5 +1,5 @@
 {
-  "name": "Gestio de les practiques Duals",
+  "name": "Gestió de les pràctiques Duals",
   "short_name": "Duals",
   "start_url": "/",
   "display": "standalone",
@@ -7,9 +7,9 @@
   "theme_color": "#1E2C45",
   "icons": [
     {
-      "src": "favicon.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
   ]
 }
