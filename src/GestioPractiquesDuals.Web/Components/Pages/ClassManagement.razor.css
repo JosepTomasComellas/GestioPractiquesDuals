@@ -1,19 +1,23 @@
 .class-management-shell {
-    padding: 1.55rem 1.55rem 2rem;
-    max-width: 1880px;
+    padding: 0.15rem 0 2rem;
+    max-width: 100%;
 }
 
 .class-management-header {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
 }
 
 .class-management-title {
     color: #404650;
     font-weight: 700;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
 }
 
 .class-management-subtitle {
     color: #616977;
+    font-size: 1rem;
 }
 
 .class-year-grid {
@@ -70,7 +74,7 @@
 }
 
 .class-table-header {
-    padding: 1rem 1.2rem 0.35rem;
+    padding: 0.95rem 1.2rem 0.35rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -109,6 +113,6 @@
     }
 
     .class-management-shell {
-        padding: 1rem 1rem 1.5rem;
+        padding: 0.1rem 0 1.5rem;
     }
 }

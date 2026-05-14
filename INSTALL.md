@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.4.1`
+Versió actual del producte: `V:0.4.2`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -218,6 +218,10 @@ Canvi actual:
 - `V:0.3.6`: la redirecció al login passa a ser relativa i preserva el host/port originals del navegador.
 - `V:0.3.7`: la pantalla de login deixa de fer crides HTTPS internes i mostra la configuració bootstrap directament des d'opcions.
 - `V:0.3.8`: es valida explícitament `BOOTSTRAP_ADMIN_PASSWORD` i es mostra un error clar si el `.env` no compleix la política d'Identity.
+- `V:0.3.9`: la web es connecta correctament a l'API interna per `http://api:8080/` i la portada tolera la indisponibilitat temporal del backend.
+- `V:0.4.0`: s'afegeixen els mòduls `Gestió de classes` i `Cicles i tutors`, amb control d'obertura del formulari per classe.
+- `V:0.4.1`: s'activa un `mode de proves` per entrar sense login i es crea la pantalla `Activitats i seguiment`.
+- `V:0.4.2`: es corregeixen dimensions, branding i espaiats del shell principal i de les pantalles acadèmiques.
 
 ## Estat actual
 
