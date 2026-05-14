@@ -19,7 +19,7 @@
                 <MudIconButton Icon="@Icons.Material.Filled.Palette" Color="Color.Inherit" />
                 <MudIconButton Icon="@Icons.Material.Filled.DarkMode" Color="Color.Inherit" />
                 <MudAvatar Size="Size.Medium" Class="user-avatar">@GetInitials(context.User)</MudAvatar>
-                <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Href="/logout" />
+                <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Href="/auth/logout" />
             </Authorized>
             <NotAuthorized>
                 <MudButton Variant="Variant.Filled" Color="Color.Error" Href="/login" StartIcon="@Icons.Material.Filled.Login">Accés</MudButton>

@@ -1,74 +1,108 @@
 @page "/login"
 @attribute [AllowAnonymous]
 @layout AuthLayout
-@using GestioPractiquesDuals.Infrastructure.Identity
-@inject SignInManager<ApplicationUser> SignInManager
+@using Microsoft.AspNetCore.WebUtilities
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpClientFactory HttpClientFactory
 
 <PageTitle>Accés · Gestió de les pràctiques Duals</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.False" Class="login-shell">
-    <MudPaper Class="login-card" Elevation="8">
-        <div class="login-header">
-            <MudImage Src="/favicon.ico" Alt="Salesians Sarrià" Class="login-logo" />
-            <MudText Typo="Typo.h3" Class="login-title">salesians</MudText>
-            <MudText Typo="Typo.h6" Class="login-subtitle">SARRIÀ</MudText>
-            <MudText Typo="Typo.h5" Class="mt-6 login-system">Gestió de les pràctiques Duals</MudText>
-            <MudText Typo="Typo.body1" Class="login-copy">Accés intern per a professorat, gestió i alumnat.</MudText>
-        </div>
+<div class="login-page-shell">
+    <section class="login-card">
+        <header class="login-card-header">
+            <div class="login-brand">
+                <img src="/favicon.ico" alt="Salesians Sarrià" class="login-brand-logo" />
+                <div class="login-brand-copy">
+                    <div class="login-brand-title">salesians</div>
+                    <div class="login-brand-subtitle">SARRIÀ</div>
+                </div>
+            </div>
 
-        <MudForm @ref="_form" Model="_model" Class="login-form" @bind-IsValid="_isValid">
-            <MudTextField T="string"
-                          Label="Correu electrònic"
-                          Variant="Variant.Outlined"
-                          Margin="Margin.Dense"
-                          FullWidth="true"
-                          Required="true"
-                          @bind-Value="_model.Email" />
-            <MudTextField T="string"
-                          Label="Contrasenya"
-                          Variant="Variant.Outlined"
-                          Margin="Margin.Dense"
-                          FullWidth="true"
-                          Required="true"
-                          InputType="@(_showPassword ? InputType.Text : InputType.Password)"
-                          Adornment="Adornment.End"
-                          AdornmentIcon="@(_showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
-                          OnAdornmentClick="TogglePassword"
-                          @bind-Value="_model.Password" />
+            <h1 class="login-heading">Gestió de les pràctiques Duals</h1>
+            <p class="login-subheading">Accés unificat per a professorat, gestió i alumnat.</p>
+        </header>
 
-            @if (!string.IsNullOrWhiteSpace(_errorMessage))
+        <main class="login-card-body">
+            <form method="post" action="/auth/login" class="login-form-native">
+                <input type="hidden" name="returnUrl" value="@CurrentReturnUrl" />
+
+                <button type="button" class="access-mode access-mode-primary">
+                    <span class="access-mode-icon material-icons">school</span>
+                    <span>ACCÉS PROFESSORAT I GESTIÓ</span>
+                </button>
+
+                <div class="input-group">
+                    <label for="login-email">Correu electrònic</label>
+                    <input id="login-email"
+                           name="email"
+                           type="email"
+                           autocomplete="username"
+                           value="@PrefilledEmail"
+                           placeholder="nom.cognom@sarria.salesians.cat" />
+                </div>
+
+                <div class="input-group">
+                    <label for="login-password">Contrasenya</label>
+                    <div class="password-wrapper">
+                        <input id="login-password"
+                               name="password"
+                               type="@(_showPassword ? "text" : "password")"
+                               autocomplete="current-password"
+                               value="@PrefilledPassword"
+                               placeholder="Introdueix la contrasenya" />
+                        <button type="button" class="password-toggle" @onclick="TogglePassword" aria-label="Mostrar o ocultar contrasenya">
+                            <span class="material-icons">@(_showPassword ? "visibility_off" : "visibility")</span>
+                        </button>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+                {
+                    <div class="login-error">@ErrorMessage</div>
+                }
+
+                <button type="submit" class="submit-button">ACCEDIR</button>
+            </form>
+        </main>
+
+        <footer class="login-card-footer">
+            <div class="login-footer-links">
+                <div class="login-footer-link">
+                    <span class="material-icons star">star</span>
+                    <span>Seguiment</span>
+                </div>
+                <div class="login-footer-link">
+                    <span class="material-icons groups">groups</span>
+                    <span>Coordinació</span>
+                </div>
+                <div class="login-footer-link">
+                    <span class="material-icons bar">bar_chart</span>
+                    <span>Resultats</span>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(BootstrapAdminEmail))
             {
-                <MudAlert Severity="Severity.Error" Dense="true" Class="mt-4">@_errorMessage</MudAlert>
+                <div class="login-footer-notes">
+                    <div>Administrador inicial: <strong>@BootstrapAdminEmail</strong></div>
+                    <div>Configurable des del fitxer <strong>.env</strong> del desplegament.</div>
+                </div>
             }
 
-            <MudButton Variant="Variant.Filled"
-                       Color="Color.Error"
-                       FullWidth="true"
-                       Class="login-button"
-                       Disabled="_submitting"
-                       OnClick="SubmitAsync">
-                @_buttonText
-            </MudButton>
-        </MudForm>
-
-        <div class="login-footer">
-            <MudText Typo="Typo.caption">Administrador inicial: <strong>admin.duals@salesianssarria.test</strong></MudText>
-            <MudText Typo="Typo.caption">Contrasenya inicial: <strong>Duals.Admin.2026!</strong></MudText>
-        </div>
-    </MudPaper>
-</MudContainer>
+            <div class="login-footer-meta">Salesians de Sarrià · Dept. d'Informàtica · V:0.3.4</div>
+        </footer>
+    </section>
+</div>
 
 @code {
-    private readonly LoginModel _model = new();
-    private MudForm? _form;
-    private bool _isValid;
     private bool _showPassword;
-    private bool _submitting;
-    private string? _errorMessage;
 
-    private string _buttonText => _submitting ? "Validant..." : "ACCEDIR";
+    private string CurrentReturnUrl { get; set; } = "/";
+    private string? ErrorMessage { get; set; }
+    private string PrefilledEmail { get; set; } = string.Empty;
+    private string PrefilledPassword { get; set; } = string.Empty;
+    private string? BootstrapAdminEmail { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,7 +110,28 @@
         if (authState.User.Identity?.IsAuthenticated == true)
         {
             NavigationManager.NavigateTo("/");
+            return;
         }
+
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var query = QueryHelpers.ParseQuery(uri.Query);
+
+        if (query.TryGetValue("ReturnUrl", out var returnUrl) && !string.IsNullOrWhiteSpace(returnUrl))
+        {
+            CurrentReturnUrl = returnUrl.ToString();
+        }
+
+        if (query.TryGetValue("error", out var error) && !string.IsNullOrWhiteSpace(error))
+        {
+            ErrorMessage = error.ToString();
+        }
+
+        if (query.TryGetValue("email", out var email) && !string.IsNullOrWhiteSpace(email))
+        {
+            PrefilledEmail = email.ToString();
+        }
+
+        await LoadBootstrapAdminAsync();
     }
 
     private void TogglePassword()
@@ -84,37 +139,24 @@
         _showPassword = !_showPassword;
     }
 
-    private async Task SubmitAsync()
+    private async Task LoadBootstrapAdminAsync()
     {
-        if (_form is null)
+        try
         {
-            return;
+            var client = HttpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(NavigationManager.BaseUri);
+            var response = await client.GetFromJsonAsync<BootstrapAdminDto>("/auth/bootstrap-admin");
+            BootstrapAdminEmail = response?.Email;
         }
-
-        await _form.ValidateAsync();
-        if (!_isValid)
+        catch
         {
-            _errorMessage = "Cal informar el correu i la contrasenya.";
-            return;
+            BootstrapAdminEmail = null;
         }
-
-        _submitting = true;
-        _errorMessage = null;
-
-        var result = await SignInManager.PasswordSignInAsync(_model.Email, _model.Password, isPersistent: true, lockoutOnFailure: false);
-        if (result.Succeeded)
-        {
-            NavigationManager.NavigateTo("/", forceLoad: true);
-            return;
-        }
-
-        _errorMessage = "No s'ha pogut validar l'accés. Revisa les credencials.";
-        _submitting = false;
     }
 
-    private sealed class LoginModel
+    private sealed class BootstrapAdminDto
     {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string? Email { get; set; }
+        public string? DisplayName { get; set; }
     }
 }

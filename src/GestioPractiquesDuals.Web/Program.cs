@@ -2,11 +2,13 @@ using GestioPractiquesDuals.Web.Components;
 using GestioPractiquesDuals.Web.Services;
 using GestioPractiquesDuals.Infrastructure;
 using GestioPractiquesDuals.Infrastructure.Identity;
+using GestioPractiquesDuals.Infrastructure.Options;
 using GestioPractiquesDuals.Infrastructure.Persistence;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -87,5 +89,47 @@ await using (var scope = app.Services.CreateAsyncScope())
     var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
     await seeder.SeedAsync();
 }
+
+app.MapPost("/auth/login", async (HttpContext httpContext, SignInManager<ApplicationUser> signInManager) =>
+{
+    var form = await httpContext.Request.ReadFormAsync();
+    var email = form["email"].ToString().Trim();
+    var password = form["password"].ToString();
+    var returnUrl = form["returnUrl"].ToString();
+
+    if (string.IsNullOrWhiteSpace(returnUrl) || !Uri.IsWellFormedUriString(returnUrl, UriKind.Relative))
+    {
+        returnUrl = "/";
+    }
+
+    if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+    {
+        return Results.LocalRedirect($"/login?error={Uri.EscapeDataString("Cal informar el correu i la contrasenya.")}&ReturnUrl={Uri.EscapeDataString(returnUrl)}");
+    }
+
+    var result = await signInManager.PasswordSignInAsync(email, password, isPersistent: true, lockoutOnFailure: false);
+    if (result.Succeeded)
+    {
+        return Results.LocalRedirect(returnUrl);
+    }
+
+    return Results.LocalRedirect($"/login?error={Uri.EscapeDataString("No s'ha pogut validar l'accés. Revisa les credencials.")}&ReturnUrl={Uri.EscapeDataString(returnUrl)}");
+}).AllowAnonymous();
+
+app.MapGet("/auth/logout", async (SignInManager<ApplicationUser> signInManager) =>
+{
+    await signInManager.SignOutAsync();
+    return Results.LocalRedirect("/login");
+}).AllowAnonymous();
+
+app.MapGet("/auth/bootstrap-admin", (IOptions<BootstrapAdminOptions> options) =>
+{
+    var admin = options.Value;
+    return Results.Json(new
+    {
+        admin.Email,
+        admin.DisplayName
+    });
+}).AllowAnonymous();
 
 app.Run();
