@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.4.0`
+Versió actual del producte: `V:0.4.1`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -102,6 +102,25 @@ El tall `V:0.4.0` incorpora:
 - mòdul `Gestió de classes`
 - mòdul `Cicles i tutors`
 - commutador de control per obrir o tancar l'edició del formulari d'alumnes per classe
+
+Per activar el `mode de proves` i entrar sense login, edita:
+
+- `/docker/GestioPractiquesDuals/deploy/docker/.env`
+
+Amb valors com aquests:
+
+```env
+TEST_MODE_ENABLED=true
+TEST_MODE_EMAIL=test.duals@sarria.salesians.cat
+TEST_MODE_DISPLAY_NAME=Usuari de proves
+TEST_MODE_ROLE=Administrator
+```
+
+I després torna a desplegar:
+
+```bash
+/docker/GestioPractiquesDuals/deploy/docker/deploy-lxc.sh
+```
 
 ## Fitxer `.env`
 

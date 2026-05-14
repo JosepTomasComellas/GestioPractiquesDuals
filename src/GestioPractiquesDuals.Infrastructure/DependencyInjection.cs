@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.Configure<PostgresOptions>(configuration.GetSection(PostgresOptions.SectionName));
         services.Configure<BootstrapAdminOptions>(configuration.GetSection(BootstrapAdminOptions.SectionName));
         services.Configure<SchoolOptions>(configuration.GetSection(SchoolOptions.SectionName));
+        services.Configure<TestModeOptions>(configuration.GetSection(TestModeOptions.SectionName));
 
         var connectionString =
             configuration.GetSection(PostgresOptions.SectionName).Get<PostgresOptions>()?.ConnectionString

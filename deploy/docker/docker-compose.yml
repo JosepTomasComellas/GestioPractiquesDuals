@@ -35,6 +35,10 @@ services:
       Postgres__ConnectionString: Host=postgres;Port=5432;Database=duals;Username=duals;Password=duals
       ConnectionStrings__Redis: redis:6379
       School__EmailDomain: ${SCHOOL_EMAIL_DOMAIN:-sarria.salesians.cat}
+      TestMode__Enabled: ${TEST_MODE_ENABLED:-false}
+      TestMode__Email: ${TEST_MODE_EMAIL:-test.duals@sarria.salesians.cat}
+      TestMode__DisplayName: ${TEST_MODE_DISPLAY_NAME:-Usuari de proves}
+      TestMode__Role: ${TEST_MODE_ROLE:-Administrator}
     depends_on:
       postgres:
         condition: service_healthy
@@ -56,6 +60,10 @@ services:
       BootstrapAdmin__Email: ${BOOTSTRAP_ADMIN_EMAIL:-admin.duals@sarria.salesians.cat}
       BootstrapAdmin__DisplayName: ${BOOTSTRAP_ADMIN_DISPLAY_NAME:-Administrador Duals}
       BootstrapAdmin__Password: ${BOOTSTRAP_ADMIN_PASSWORD:-Duals.Admin.2026!}
+      TestMode__Enabled: ${TEST_MODE_ENABLED:-false}
+      TestMode__Email: ${TEST_MODE_EMAIL:-test.duals@sarria.salesians.cat}
+      TestMode__DisplayName: ${TEST_MODE_DISPLAY_NAME:-Usuari de proves}
+      TestMode__Role: ${TEST_MODE_ROLE:-Administrator}
     volumes:
       - data_protection_keys:/keys
     depends_on:

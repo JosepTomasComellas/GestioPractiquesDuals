@@ -1,0 +1,56 @@
+@page "/activities"
+@attribute [Authorize]
+
+<PageTitle>Activitats · Gestió de les pràctiques Duals</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="activity-workbench-shell">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="activity-workbench-header">
+        <div>
+            <MudText Typo="Typo.h4" Class="activity-workbench-title">Activitats i seguiment</MudText>
+            <MudText Typo="Typo.body1" Class="activity-workbench-subtitle">
+                Punt central de proves per validar navegació, estat i accions inicials del flux funcional.
+            </MudText>
+        </div>
+
+        <MudStack Row="true" Spacing="2">
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Bookmarks" Href="/classes/manage">CLASSES</MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Hub" Href="/cycles/manage">CICLES</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Dashboard" Href="/">DASHBOARD</MudButton>
+        </MudStack>
+    </MudStack>
+
+    <MudGrid Spacing="3">
+        <MudItem xs="12" md="8">
+            <MudPaper Class="activity-board-card">
+                <MudText Typo="Typo.h6" Class="board-title">Activitat oberta de referència</MudText>
+                <MudText Typo="Typo.h4" Class="board-code">CV-001</MudText>
+                <MudText Typo="Typo.body1" Class="board-subtitle">S1SX · Administració de sistemes · Tutor ASIX</MudText>
+                <MudText Typo="Typo.body1" Class="board-description">
+                    Seguiment inicial del procés d'enviament de currículums per a empreses actives.
+                </MudText>
+
+                <MudStack Row="true" Spacing="1" Class="board-chip-row">
+                    <MudChip T="string" Variant="Variant.Outlined">1 grup</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined">1 alumne</MudChip>
+                    <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled">1 / 1 revisat</MudChip>
+                </MudStack>
+
+                <div class="board-progress">
+                    <div class="board-progress-fill"></div>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="4">
+            <MudPaper Class="activity-side-card">
+                <MudText Typo="Typo.h6" Class="board-title">Què pots provar ara</MudText>
+                <ul class="test-list">
+                    <li>Navegar entre dashboard, classes, cicles i activitats.</li>
+                    <li>Canviar l'estat d'obertura del formulari per classe.</li>
+                    <li>Verificar que el canvi es manté en refrescar.</li>
+                    <li>Comprovar que cap botó principal queda inert.</li>
+                </ul>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

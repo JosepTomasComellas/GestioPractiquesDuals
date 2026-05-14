@@ -1,0 +1,87 @@
+.activity-workbench-shell {
+    padding: 1.55rem 1.55rem 2rem;
+    max-width: 1880px;
+}
+
+.activity-workbench-header {
+    margin-bottom: 1.25rem;
+}
+
+.activity-workbench-title {
+    color: #404650;
+    font-weight: 700;
+}
+
+.activity-workbench-subtitle {
+    color: #616977;
+}
+
+.activity-board-card,
+.activity-side-card {
+    border-radius: 12px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(31, 43, 67, 0.08);
+    box-shadow: 0 10px 24px rgba(31, 43, 67, 0.06);
+    padding: 1.25rem;
+}
+
+.board-title {
+    color: #4f5763;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.board-code {
+    color: #23314d;
+    font-weight: 800;
+}
+
+.board-subtitle,
+.board-description {
+    color: #5f6773;
+}
+
+.board-description {
+    margin-top: 1rem;
+}
+
+.board-chip-row {
+    margin-top: 1rem;
+}
+
+.board-progress {
+    margin-top: 1.1rem;
+    width: 100%;
+    height: 5px;
+    border-radius: 999px;
+    background: #f5d8a6;
+    overflow: hidden;
+}
+
+.board-progress-fill {
+    width: 52%;
+    height: 100%;
+    background: #f59e0b;
+}
+
+.test-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: #5f6773;
+}
+
+.test-list li + li {
+    margin-top: 0.55rem;
+}
+
+@media (max-width: 960px) {
+    .activity-workbench-header {
+        gap: 1rem;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .activity-workbench-shell {
+        padding: 1rem 1rem 1.5rem;
+    }
+}

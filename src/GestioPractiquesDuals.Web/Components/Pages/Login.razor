@@ -6,6 +6,7 @@
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject Microsoft.Extensions.Options.IOptions<BootstrapAdminOptions> BootstrapAdminOptions
+@inject Microsoft.Extensions.Options.IOptions<TestModeOptions> TestModeOptions
 
 <PageTitle>Accés · Gestió de les pràctiques Duals</PageTitle>
 
@@ -111,6 +112,12 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         if (authState.User.Identity?.IsAuthenticated == true)
+        {
+            NavigationManager.NavigateTo("/");
+            return;
+        }
+
+        if (TestModeOptions.Value.Enabled)
         {
             NavigationManager.NavigateTo("/");
             return;

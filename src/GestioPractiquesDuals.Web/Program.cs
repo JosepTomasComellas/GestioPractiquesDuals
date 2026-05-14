@@ -4,6 +4,8 @@ using GestioPractiquesDuals.Infrastructure;
 using GestioPractiquesDuals.Infrastructure.Identity;
 using GestioPractiquesDuals.Infrastructure.Options;
 using GestioPractiquesDuals.Infrastructure.Persistence;
+using GestioPractiquesDuals.Web.Security;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -17,6 +19,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddMudServices();
 builder.Services.AddInfrastructure(builder.Configuration);
+var testModeOptions = builder.Configuration.GetSection(TestModeOptions.SectionName).Get<TestModeOptions>() ?? new TestModeOptions();
 var dataProtectionKeysPath =
     builder.Configuration["DataProtection:KeysPath"]
     ?? Path.Combine(builder.Environment.ContentRootPath, "App_Data", "DataProtectionKeys");
@@ -24,8 +27,25 @@ Directory.CreateDirectory(dataProtectionKeysPath);
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(dataProtectionKeysPath))
     .SetApplicationName("GestioPractiquesDuals");
-builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
-    .AddIdentityCookies();
+var authenticationBuilder = builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = testModeOptions.Enabled
+        ? TestModeAuthenticationHandler.SchemeName
+        : IdentityConstants.ApplicationScheme;
+    options.DefaultChallengeScheme = testModeOptions.Enabled
+        ? TestModeAuthenticationHandler.SchemeName
+        : IdentityConstants.ApplicationScheme;
+    options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+});
+
+if (testModeOptions.Enabled)
+{
+    authenticationBuilder.AddScheme<AuthenticationSchemeOptions, TestModeAuthenticationHandler>(
+        TestModeAuthenticationHandler.SchemeName,
+        _ => { });
+}
+
+authenticationBuilder.AddIdentityCookies();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/login";
@@ -133,6 +153,11 @@ app.MapPost("/auth/login", async (HttpContext httpContext, SignInManager<Applica
 
 app.MapGet("/auth/logout", async (SignInManager<ApplicationUser> signInManager) =>
 {
+    if (testModeOptions.Enabled)
+    {
+        return Results.LocalRedirect("/");
+    }
+
     await signInManager.SignOutAsync();
     return Results.LocalRedirect("/login");
 }).AllowAnonymous();
