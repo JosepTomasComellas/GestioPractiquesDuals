@@ -1,0 +1,120 @@
+@page "/login"
+@attribute [AllowAnonymous]
+@layout AuthLayout
+@using GestioPractiquesDuals.Infrastructure.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Accés · Gestió de les pràctiques Duals</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="login-shell">
+    <MudPaper Class="login-card" Elevation="8">
+        <div class="login-header">
+            <MudImage Src="/favicon.ico" Alt="Salesians Sarrià" Class="login-logo" />
+            <MudText Typo="Typo.h3" Class="login-title">salesians</MudText>
+            <MudText Typo="Typo.h6" Class="login-subtitle">SARRIÀ</MudText>
+            <MudText Typo="Typo.h5" Class="mt-6 login-system">Gestió de les pràctiques Duals</MudText>
+            <MudText Typo="Typo.body1" Class="login-copy">Accés intern per a professorat, gestió i alumnat.</MudText>
+        </div>
+
+        <MudForm @ref="_form" Model="_model" Class="login-form" @bind-IsValid="_isValid">
+            <MudTextField T="string"
+                          Label="Correu electrònic"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense"
+                          FullWidth="true"
+                          Required="true"
+                          @bind-Value="_model.Email" />
+            <MudTextField T="string"
+                          Label="Contrasenya"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense"
+                          FullWidth="true"
+                          Required="true"
+                          InputType="@(_showPassword ? InputType.Text : InputType.Password)"
+                          Adornment="Adornment.End"
+                          AdornmentIcon="@(_showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
+                          OnAdornmentClick="TogglePassword"
+                          @bind-Value="_model.Password" />
+
+            @if (!string.IsNullOrWhiteSpace(_errorMessage))
+            {
+                <MudAlert Severity="Severity.Error" Dense="true" Class="mt-4">@_errorMessage</MudAlert>
+            }
+
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Error"
+                       FullWidth="true"
+                       Class="login-button"
+                       Disabled="_submitting"
+                       OnClick="SubmitAsync">
+                @_buttonText
+            </MudButton>
+        </MudForm>
+
+        <div class="login-footer">
+            <MudText Typo="Typo.caption">Administrador inicial: <strong>admin.duals@salesianssarria.test</strong></MudText>
+            <MudText Typo="Typo.caption">Contrasenya inicial: <strong>Duals.Admin.2026!</strong></MudText>
+        </div>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private readonly LoginModel _model = new();
+    private MudForm? _form;
+    private bool _isValid;
+    private bool _showPassword;
+    private bool _submitting;
+    private string? _errorMessage;
+
+    private string _buttonText => _submitting ? "Validant..." : "ACCEDIR";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity?.IsAuthenticated == true)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private void TogglePassword()
+    {
+        _showPassword = !_showPassword;
+    }
+
+    private async Task SubmitAsync()
+    {
+        if (_form is null)
+        {
+            return;
+        }
+
+        await _form.ValidateAsync();
+        if (!_isValid)
+        {
+            _errorMessage = "Cal informar el correu i la contrasenya.";
+            return;
+        }
+
+        _submitting = true;
+        _errorMessage = null;
+
+        var result = await SignInManager.PasswordSignInAsync(_model.Email, _model.Password, isPersistent: true, lockoutOnFailure: false);
+        if (result.Succeeded)
+        {
+            NavigationManager.NavigateTo("/", forceLoad: true);
+            return;
+        }
+
+        _errorMessage = "No s'ha pogut validar l'accés. Revisa les credencials.";
+        _submitting = false;
+    }
+
+    private sealed class LoginModel
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+    }
+}

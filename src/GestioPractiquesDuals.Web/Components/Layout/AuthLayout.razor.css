@@ -1,0 +1,6 @@
+.auth-layout {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(248, 248, 248, 0.9), rgba(248, 248, 248, 0.9)),
+        url('/backgrounds/salesians.png') center/cover no-repeat fixed;
+}

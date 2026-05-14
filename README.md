@@ -1,13 +1,13 @@
-# Gestio de les practiques Duals
+# Gestió de les pràctiques Duals
 
-Versió actual del producte: `V:0.2.1`
+Versió actual del producte: `V:0.3.0`
 
 Projecte per a la gestió de les pràctiques Duals dels cicles formatius, implementat amb `.NET 10`, `Blazor`, `API ASP.NET Core`, `PostgreSQL`, `Redis`, `Nginx`, `Docker Compose` i una capa preparada per `MCP`.
 
 ## Estat actual
 
 - Fase en curs: `Fase 2`
-- Estat: shell visual tipus AutoCo en construcció i bloc inicial d'identitat en marxa
+- Estat: shell visual tipus AutoCo en construcció, dashboard connectat a API i identitat base activa
 - Compatibilitat objectiu: `Visual Studio 2026` o posterior
 - Base de dades inicial: `PostgreSQL`
 - Criteri d'implementacio: simplicitat, mantenibilitat i portabilitat
@@ -33,13 +33,13 @@ Projecte per a la gestió de les pràctiques Duals dels cicles formatius, implem
 
 ## Execucio local
 
-Per la posada en marxa local consulta [INSTALL.md](/D:/Codex/Duals/INSTALL.md).
+Per la posada en marxa local consulta [INSTALL.md](INSTALL.md).
 
 ## Desplegament en LXC
 
 Per al desplegament o actualitzacio en un contenidor LXC de Proxmox es disposa del script:
 
-- [deploy-lxc.sh](/D:/Codex/Duals/deploy/docker/deploy-lxc.sh)
+- [deploy-lxc.sh](deploy/docker/deploy-lxc.sh)
 
 El script permet:
 
@@ -85,6 +85,17 @@ Flux base proposat:
 4. fer `git add`, `git commit` i `git tag` si correspon;
 5. fer `git push` i `git push --tags`.
 
-## Situacio Git actual
+## Credencials inicials de prova
 
-En aquest moment el repositori local existeix, pero encara no te cap remot configurat. Abans de poder publicar continuament a GitHub caldra afegir el remot del repositori.
+Quan la base de dades arrenca correctament i s'apliquen les migracions, la web crea un usuari administrador inicial:
+
+- correu: `admin.duals@salesianssarria.test`
+- contrasenya: `Duals.Admin.2026!`
+
+També es creen usuaris inicials associats al professor i a l'alumne demo sembrats a la base de dades.
+
+## Situació Git actual
+
+El repositori ja està vinculat a GitHub a:
+
+- [JosepTomasComellas/GestioPractiquesDuals](https://github.com/JosepTomasComellas/GestioPractiquesDuals)

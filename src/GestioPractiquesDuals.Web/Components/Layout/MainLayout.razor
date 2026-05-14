@@ -10,13 +10,21 @@
 
         <MudSpacer />
 
-        <MudChip T="string" Color="Color.Default" Variant="Variant.Text" Class="role-chip">Admin</MudChip>
-        <MudText Typo="Typo.body1" Class="user-name">Josep Tomàs Comellas</MudText>
-        <MudIconButton Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" />
-        <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="Color.Inherit" />
-        <MudIconButton Icon="@Icons.Material.Filled.Palette" Color="Color.Inherit" />
-        <MudIconButton Icon="@Icons.Material.Filled.DarkMode" Color="Color.Inherit" />
-        <MudAvatar Size="Size.Medium" Class="user-avatar">JT</MudAvatar>
+        <AuthorizeView>
+            <Authorized>
+                <MudChip T="string" Color="Color.Default" Variant="Variant.Text" Class="role-chip">@GetRoleLabel(context.User)</MudChip>
+                <MudText Typo="Typo.body1" Class="user-name">@GetDisplayName(context.User)</MudText>
+                <MudIconButton Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" />
+                <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="Color.Inherit" />
+                <MudIconButton Icon="@Icons.Material.Filled.Palette" Color="Color.Inherit" />
+                <MudIconButton Icon="@Icons.Material.Filled.DarkMode" Color="Color.Inherit" />
+                <MudAvatar Size="Size.Medium" Class="user-avatar">@GetInitials(context.User)</MudAvatar>
+                <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Href="/logout" />
+            </Authorized>
+            <NotAuthorized>
+                <MudButton Variant="Variant.Filled" Color="Color.Error" Href="/login" StartIcon="@Icons.Material.Filled.Login">Accés</MudButton>
+            </NotAuthorized>
+        </AuthorizeView>
     </MudAppBar>
 
     <MudMainContent Class="main-content">
@@ -25,7 +33,7 @@
 
     <footer class="app-footer">
         <span>Salesians de Sarrià · Dept. d'Informàtica</span>
-        <span>Gestió de les pràctiques Duals · V:0.2.0</span>
+        <span>Gestió de les pràctiques Duals · @AppVersion</span>
     </footer>
 </MudLayout>
 
@@ -34,3 +42,48 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">x</span>
 </div>
+
+@code {
+    private string AppVersion =>
+        $"V:{typeof(Program).Assembly.GetName().Version?.ToString(3) ?? "0.0.0"}";
+
+    private static string GetDisplayName(System.Security.Claims.ClaimsPrincipal user) =>
+        user.Identity?.Name ?? user.FindFirst("name")?.Value ?? "Usuari";
+
+    private static string GetInitials(System.Security.Claims.ClaimsPrincipal user)
+    {
+        var displayName = GetDisplayName(user);
+        var parts = displayName.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        return parts.Length switch
+        {
+            0 => "U",
+            1 => parts[0][0].ToString().ToUpperInvariant(),
+            _ => string.Concat(parts[0][0], parts[^1][0]).ToUpperInvariant()
+        };
+    }
+
+    private static string GetRoleLabel(System.Security.Claims.ClaimsPrincipal user)
+    {
+        if (user.IsInRole("Administrator"))
+        {
+            return "Administrador";
+        }
+
+        if (user.IsInRole("Manager"))
+        {
+            return "Gestor";
+        }
+
+        if (user.IsInRole("Teacher"))
+        {
+            return "Professor/Tutor";
+        }
+
+        if (user.IsInRole("Student"))
+        {
+            return "Alumne";
+        }
+
+        return "Accés";
+    }
+}

@@ -1,0 +1,80 @@
+.login-shell {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-card {
+    width: min(100%, 640px);
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.login-header {
+    background: #1f2b43;
+    color: white;
+    padding: 3rem 2.5rem 2.5rem;
+    text-align: center;
+}
+
+.login-logo {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    background: white;
+    border-radius: 18px;
+    padding: 10px;
+    margin-inline: auto;
+}
+
+.login-title {
+    margin-top: 1rem;
+    font-weight: 800;
+    text-transform: lowercase;
+}
+
+.login-subtitle {
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.login-system {
+    font-weight: 700;
+}
+
+.login-copy {
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.login-form {
+    padding: 2rem 2.5rem 1rem;
+}
+
+.login-button {
+    margin-top: 1.5rem;
+    min-height: 52px;
+    font-weight: 700;
+}
+
+.login-footer {
+    padding: 0 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+@media (max-width: 640px) {
+    .login-shell {
+        padding: 1rem;
+    }
+
+    .login-header,
+    .login-form,
+    .login-footer {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+}

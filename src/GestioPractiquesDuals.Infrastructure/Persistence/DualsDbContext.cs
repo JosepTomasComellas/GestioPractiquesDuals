@@ -1,10 +1,14 @@
 using GestioPractiquesDuals.Domain.Entities;
 using GestioPractiquesDuals.Domain.Enums;
+using GestioPractiquesDuals.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestioPractiquesDuals.Infrastructure.Persistence;
 
-public sealed class DualsDbContext(DbContextOptions<DualsDbContext> options) : DbContext(options)
+public sealed class DualsDbContext(DbContextOptions<DualsDbContext> options)
+    : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options)
 {
     public DbSet<AcademicYear> AcademicYears => Set<AcademicYear>();
     public DbSet<TrainingCycle> TrainingCycles => Set<TrainingCycle>();
@@ -18,6 +22,15 @@ public sealed class DualsDbContext(DbContextOptions<DualsDbContext> options) : D
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<ApplicationUser>(entity =>
+        {
+            entity.Property(x => x.DisplayName).HasMaxLength(200);
+            entity.HasIndex(x => x.TeacherId).IsUnique();
+            entity.HasIndex(x => x.StudentId).IsUnique();
+        });
+
         modelBuilder.Entity<AcademicYear>(entity =>
         {
             entity.HasIndex(x => x.Code).IsUnique();

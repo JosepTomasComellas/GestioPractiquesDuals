@@ -1,6 +1,6 @@
 # INSTALL
 
-Versió actual del producte: `V:0.2.1`
+Versió actual del producte: `V:0.3.0`
 
 Aquest document descriu la instal·lació i posada en marxa inicial de **Gestió de les pràctiques Duals**.
 
@@ -48,7 +48,7 @@ dotnet run --project D:\Codex\Duals\src\GestioPractiquesDuals.Web
 
 Fitxer principal:
 
-- [docker-compose.yml](/D:/Codex/Duals/deploy/docker/docker-compose.yml)
+- [docker-compose.yml](deploy/docker/docker-compose.yml)
 
 Des de `D:\Codex\Duals\deploy\docker`:
 
@@ -64,7 +64,7 @@ Per a entorns LXC es treballara sobre la ruta acordada:
 
 Script de desplegament/actualitzacio:
 
-- [deploy-lxc.sh](/D:/Codex/Duals/deploy/docker/deploy-lxc.sh)
+- [deploy-lxc.sh](deploy/docker/deploy-lxc.sh)
 
 Exemple d'us:
 
@@ -123,6 +123,17 @@ Criteri:
 - la connexio esta desacoblada per `connection string`;
 - el sistema queda preparat per moure la BBDD a una instancia externa de PostgreSQL sense canvis estructurals al codi.
 
+## Migracions i identitat
+
+La web aplica migracions de base de dades a l'arrencada i sembra els rols i usuaris inicials.
+
+Administrador inicial:
+
+- correu: `admin.duals@salesianssarria.test`
+- contrasenya: `Duals.Admin.2026!`
+
+Perquè la web pugui arrencar, `PostgreSQL` ha d'estar disponible i accessible amb la `connection string` configurada.
+
 ## Versionat
 
 El producte segueix el format `V:x.y.z`.
@@ -138,20 +149,14 @@ Canvi actual:
 - `V:0.1.1`: s'afegeix script de desplegament/actualitzacio per entorn LXC.
 - `V:0.1.2`: s'ajusta la ruta objectiu de desplegament a `/docker/GestioPractiquesDuals`.
 - `V:0.1.3`: s'ajusta el desplegament per exposar el port 443 a la maquina/LXC.
-
-## Publicacio a GitHub
-
-Abans de poder pujar el repositori de forma continua, cal configurar el remot. Exemple orientatiu:
-
-```powershell
-git -C D:\Codex\Duals remote add origin https://github.com/JosepTomasComellas/<nom-repo>.git
-git -C D:\Codex\Duals branch -M main
-git -C D:\Codex\Duals push -u origin main
-```
+- `V:0.2.0`: s'obre la fase 2 amb millora visual, favicon i base de rols.
+- `V:0.2.1`: el dashboard s'apropa a l'estil AutoCo i prepara millor el shell funcional.
+- `V:0.3.0`: s'activa identitat amb `ASP.NET Core Identity`, migracions i login inicial.
 
 ## Estat actual
 
 - documentacio base creada
 - esquelet de fase 1 compilable
+- fase 2 amb dashboard API i autenticacio inicial
 - proves base en verd
-- remot de GitHub encara no configurat
+- remot GitHub configurat

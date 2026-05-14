@@ -1,5 +1,8 @@
+using GestioPractiquesDuals.Application.Dashboard;
 using GestioPractiquesDuals.Application.Overview;
 using GestioPractiquesDuals.Application.Security;
+using GestioPractiquesDuals.Infrastructure.Dashboard;
+using GestioPractiquesDuals.Infrastructure.Identity;
 using GestioPractiquesDuals.Infrastructure.Options;
 using GestioPractiquesDuals.Infrastructure.Overview;
 using GestioPractiquesDuals.Infrastructure.Persistence;
@@ -25,6 +28,7 @@ public static class DependencyInjection
 
         var redisConnectionString = configuration.GetConnectionString("Redis") ?? "localhost:6379";
         services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(redisConnectionString));
+        services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<IOverviewService, OverviewService>();
         services.AddScoped<IIdentityOverviewService, IdentityOverviewService>();
 
